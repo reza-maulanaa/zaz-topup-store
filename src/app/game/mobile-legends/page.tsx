@@ -1,4 +1,6 @@
 import MobileLegends from "@/features/game/ML/MobileLegends";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 export const metadata = {
   title: "Top Up Mobile Legends - ZAZ Store",
@@ -6,5 +8,11 @@ export const metadata = {
 };
 
 export default function MobileLegendsPage() {
-  return <MobileLegends />;
+  return (
+    <>
+      <Header />
+      <MobileLegends />
+      <Footer />
+    </>
+  );
 }

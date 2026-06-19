@@ -7,6 +7,8 @@ import { paymentMethods } from "./data/paymentMethods";
 import { formatCurrency } from "./utils/formatCurrency";
 import { useFreeFireOrder } from "./hooks/useFreeFireOrder";
 
+// ─── Icons ───────────────────────────────────────────────────────────────────
+
 function DiamondIcon({ size = 16 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -18,7 +20,17 @@ function DiamondIcon({ size = 16 }: { size?: number }) {
 
 function CheckIcon() {
   return (
-    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="stroke-current" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="11"
+      height="11"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
       <polyline points="20 6 9 17 4 12" />
     </svg>
   );
@@ -32,135 +44,350 @@ function WAIcon({ size = 18 }: { size?: number }) {
   );
 }
 
-function CategoryTabs({ activeCategory, onChange, tabsRef }: { activeCategory: CategoryKey; onChange: (value: CategoryKey) => void; tabsRef: RefObject<HTMLDivElement | null>; }) {
+// ─── Components ──────────────────────────────────────────────────────────────
+
+function CategoryTabs({
+  activeCategory,
+  onChange,
+  tabsRef,
+}: {
+  activeCategory: CategoryKey;
+  onChange: (value: CategoryKey) => void;
+  tabsRef: RefObject<HTMLDivElement | null>;
+}) {
   return (
-    <section className="rounded-[24px] border border-slate-200 bg-white p-4 shadow-sm">
-      <div ref={tabsRef} className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
-        {categories.map((category) => {
-          const active = activeCategory === category.key;
-          return (
-            <button key={category.key} data-cat={category.key} type="button" onClick={() => onChange(category.key)}
-              className={["shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition", active ? "border-red-200 bg-red-50 text-red-600" : "border-slate-200 bg-white text-slate-500 hover:border-slate-300 hover:text-slate-700"].join(" ")}>
-              {category.label}
-            </button>
-          );
-        })}
-      </div>
-    </section>
+    <div
+      ref={tabsRef}
+      className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]"
+    >
+      {categories.map((category) => {
+        const active = activeCategory === category.key;
+        return (
+          <button
+            key={category.key}
+            data-cat={category.key}
+            type="button"
+            onClick={() => onChange(category.key)}
+            className={[
+              "shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-150",
+              active
+                ? "border-red-200 bg-red-50 text-red-600 shadow-sm"
+                : "border-slate-200 bg-white text-slate-500 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-700",
+            ].join(" ")}
+          >
+            {category.label}
+          </button>
+        );
+      })}
+    </div>
   );
 }
 
 export function FreeFireHeader() {
   return (
-    <section className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
-      <div className="flex items-center gap-4">
-        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-red-500 to-orange-500 shadow-sm overflow-hidden">
+    <section className="relative overflow-hidden rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
+      <div className="pointer-events-none absolute -right-8 -top-8 h-40 w-40 rounded-full bg-orange-100/60 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-6 -left-4 h-28 w-28 rounded-full bg-red-100/60 blur-3xl" />
+
+      <div className="relative flex items-center gap-4">
+        <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl shadow-md ring-1 ring-slate-100 sm:h-[72px] sm:w-[72px]">
           <img src="/ff.avif" alt="Free Fire" className="h-full w-full object-cover" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Free Fire Indonesia</h1>
-          <p className="mt-1 text-sm text-slate-500">Top Up Diamond · Instan & Aman</p>
+          <div className="mb-1 inline-flex items-center gap-1.5 rounded-full border border-orange-200 bg-orange-50 px-2.5 py-0.5 text-[11px] font-bold text-orange-700">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-orange-500" />
+            Top Up Tersedia
+          </div>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+            Free Fire Indonesia
+          </h1>
+          <p className="mt-0.5 text-sm text-slate-400">
+            Diamond · Membership · Instan via WhatsApp
+          </p>
         </div>
       </div>
     </section>
   );
 }
 
-export function HowToOrder({ open, onToggle }: { open: boolean; onToggle: () => void; }) {
-  const steps = ["Masukkan User ID & Nickname", "Pilih item yang ingin dibeli", "Klik tombol Order via WhatsApp", "Konfirmasi & transfer ke admin", "Diamond masuk dalam 1–15 menit"];
+export function HowToOrder({
+  open,
+  onToggle,
+}: {
+  open: boolean;
+  onToggle: () => void;
+}) {
+  const steps = [
+    "Masukkan User ID & Nickname",
+    "Pilih item yang ingin dibeli",
+    "Pilih metode pembayaran",
+    "Klik tombol Order via WhatsApp",
+    "Konfirmasi & transfer ke admin",
+    "Diamond masuk dalam 1–15 menit",
+  ];
   return (
-    <section className="rounded-[24px] border border-slate-200 bg-white shadow-sm">
-      <button type="button" onClick={onToggle} className="flex w-full items-center justify-between px-5 py-4 text-left">
-        <span className="text-sm font-semibold text-slate-900 sm:text-base">Cara Order</span>
-        <span className={`inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-slate-600 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden="true">▾</span>
+    <section className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-sm">
+      <button
+        type="button"
+        onClick={onToggle}
+        className="flex w-full items-center justify-between px-5 py-4 text-left transition hover:bg-slate-50"
+        aria-expanded={open}
+      >
+        <span className="flex items-center gap-2 text-sm font-semibold text-slate-900 sm:text-base">
+          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-50 text-base">
+            📋
+          </span>
+          Cara Order
+        </span>
+        <span
+          className={`inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-slate-500 transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+          aria-hidden="true"
+        >
+          ▾
+        </span>
       </button>
       {open && (
-        <div className="border-t border-slate-200 px-5 py-4">
-          <div className="space-y-3">
+        <div className="border-t border-slate-100 px-5 py-4">
+          <ol className="space-y-3">
             {steps.map((step, index) => (
-              <div key={step} className="flex items-start gap-3 text-sm text-slate-600">
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-50 text-xs font-bold text-red-600">{index + 1}</span>
-                <span>{step}</span>
-              </div>
+              <li key={step} className="flex items-start gap-3 text-sm">
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-50 text-xs font-bold text-red-600">
+                  {index + 1}
+                </span>
+                <span className="leading-relaxed text-slate-600">{step}</span>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       )}
     </section>
   );
 }
 
-export function UserIdForm({ userId, onUserIdChange, nickname, onNicknameChange }: { userId: string; onUserIdChange: (value: string) => void; nickname: string; onNicknameChange: (value: string) => void; }) {
+export function UserIdForm({
+  userId,
+  onUserIdChange,
+  nickname,
+  onNicknameChange,
+}: {
+  userId: string;
+  onUserIdChange: (value: string) => void;
+  nickname: string;
+  onNicknameChange: (value: string) => void;
+}) {
   return (
     <section className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
       <div className="mb-4 flex items-center gap-3">
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-sm font-bold text-blue-600">1</span>
-        <h2 className="text-base font-semibold text-slate-900 sm:text-lg">Masukkan ID</h2>
-      </div>
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div className="space-y-2">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">User ID</label>
-          <input className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white" value={userId} onChange={(e) => onUserIdChange(e.target.value)} placeholder="Contoh: 123456789" inputMode="numeric" />
-        </div>
-        <div className="space-y-2">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">Nickname</label>
-          <input className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white" value={nickname} onChange={(e) => onNicknameChange(e.target.value)} placeholder="Contoh: ProPlayer123" />
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-50 text-sm font-bold text-orange-600">
+          1
+        </span>
+        <div>
+          <h2 className="text-base font-bold text-slate-900 sm:text-lg">
+            Masukkan ID Akun
+          </h2>
+          <p className="text-xs text-slate-400">Cek di profil Free Fire kamu</p>
         </div>
       </div>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div className="space-y-1.5">
+          <label className="block text-xs font-bold uppercase tracking-wide text-slate-400">
+            User ID
+          </label>
+          <input
+            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none placeholder:text-slate-300 transition focus:border-red-300 focus:bg-white focus:ring-2 focus:ring-red-100"
+            value={userId}
+            onChange={(e) => onUserIdChange(e.target.value)}
+            placeholder="Contoh: 123456789"
+            inputMode="numeric"
+          />
+        </div>
+        <div className="space-y-1.5">
+          <label className="block text-xs font-bold uppercase tracking-wide text-slate-400">
+            Nickname
+          </label>
+          <input
+            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none placeholder:text-slate-300 transition focus:border-red-300 focus:bg-white focus:ring-2 focus:ring-red-100"
+            value={nickname}
+            onChange={(e) => onNicknameChange(e.target.value)}
+            placeholder="Contoh: ProPlayer123"
+          />
+        </div>
+      </div>
+
+      {userId && nickname && (
+        <div className="mt-3 flex items-center gap-2 rounded-xl bg-emerald-50 px-4 py-2.5 text-xs font-semibold text-emerald-700">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          ID lengkap — lanjut pilih item!
+        </div>
+      )}
     </section>
   );
 }
 
-export function ProductCard({ item, selected, onSelect }: { item: Nominal; selected: boolean; onSelect: (item: Nominal) => void; }) {
+export function ProductCard({
+  item,
+  selected,
+  onSelect,
+}: {
+  item: Nominal;
+  selected: boolean;
+  onSelect: (item: Nominal) => void;
+}) {
   return (
-    <button type="button" onClick={() => onSelect(item)} className={["relative w-full rounded-2xl border p-4 text-left transition-all duration-200", selected ? "border-blue-500 bg-blue-50 shadow-sm" : "border-slate-200 bg-white hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-sm"].join(" ")}>
-      {item.discount ? <span className="absolute right-0 top-0 rounded-bl-xl rounded-tr-2xl bg-red-500 px-2.5 py-1 text-[10px] font-bold tracking-wide text-white">-{item.discount}%</span> : null}
-      {item.popular && !item.discount ? <span className="absolute right-3 top-3 text-sm">🔥</span> : null}
-      {selected ? <span className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-white"><CheckIcon /></span> : null}
+    <button
+      type="button"
+      onClick={() => onSelect(item)}
+      className={[
+        "relative w-full rounded-2xl border p-4 text-left transition-all duration-200",
+        selected
+          ? "border-red-400 bg-red-50 shadow-md shadow-red-100 ring-1 ring-red-300"
+          : "border-slate-200 bg-white hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md",
+      ].join(" ")}
+    >
+      {item.discount ? (
+        <span className="absolute right-0 top-0 rounded-bl-xl rounded-tr-2xl bg-red-500 px-2.5 py-1 text-[10px] font-bold tracking-wide text-white">
+          -{item.discount}%
+        </span>
+      ) : null}
+
+      {item.popular && !item.discount && !selected ? (
+        <span className="absolute right-2.5 top-2.5 text-sm">🔥</span>
+      ) : null}
+
+      {selected ? (
+        <span className="absolute right-2.5 top-2.5 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white shadow-sm">
+          <CheckIcon />
+        </span>
+      ) : null}
+
       {item.category === "membership" ? (
         <div className="space-y-1">
-          <h3 className="text-sm font-semibold text-slate-900 sm:text-base">{item.label}</h3>
-          {item.bonus ? <p className="text-xs font-medium text-amber-500">{item.bonus}</p> : null}
-          <p className="pt-1 text-base font-bold text-slate-900">{formatCurrency(item.price)}</p>
-          {item.originalPrice ? <p className="text-xs text-slate-400 line-through">{formatCurrency(item.originalPrice)}</p> : null}
+          <h3 className="pr-6 text-sm font-bold leading-tight text-slate-900 sm:text-base">
+            {item.label}
+          </h3>
+          {item.bonus ? (
+            <p className="text-xs font-semibold text-amber-500">{item.bonus}</p>
+          ) : null}
+          <p className="pt-1.5 text-base font-bold text-slate-900">
+            {formatCurrency(item.price)}
+          </p>
+          {item.originalPrice ? (
+            <p className="text-xs text-slate-400 line-through">
+              {formatCurrency(item.originalPrice)}
+            </p>
+          ) : null}
         </div>
       ) : (
         <div className="space-y-1">
-          <div className="mb-1"><DiamondIcon size={20} /></div>
-          <div className="text-2xl font-bold tracking-tight text-slate-900">{item.diamonds}</div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-cyan-600">Diamonds</p>
-          <p className={["pt-1 text-sm font-bold", item.category === "muraah" ? "text-emerald-600" : "text-slate-900"].join(" ")}>{formatCurrency(item.price)}</p>
-          {item.originalPrice ? <p className="text-xs text-slate-400 line-through">{formatCurrency(item.originalPrice)}</p> : null}
+          <div className="mb-1">
+            <DiamondIcon size={20} />
+          </div>
+          <div className="text-2xl font-bold tracking-tight text-slate-900">
+            {item.diamonds}
+          </div>
+          <p className="text-[11px] font-bold uppercase tracking-wide text-cyan-500">
+            Diamonds
+          </p>
+          {item.bonus ? (
+            <p className="text-[11px] font-semibold text-amber-500">+{item.bonus}</p>
+          ) : null}
+          <p
+            className={[
+              "pt-1 text-sm font-bold",
+              item.category === "muraah" ? "text-emerald-600" : "text-slate-900",
+            ].join(" ")}
+          >
+            {formatCurrency(item.price)}
+          </p>
+          {item.originalPrice ? (
+            <p className="text-xs text-slate-400 line-through">
+              {formatCurrency(item.originalPrice)}
+            </p>
+          ) : null}
         </div>
       )}
     </button>
   );
 }
 
-export function ProductGrid({ items, selected, onSelect }: { items: Nominal[]; selected: Nominal | null; onSelect: (item: Nominal) => void; }) {
-  return (
-    <section className="rounded-[24px] border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-        {items.map((item) => <ProductCard key={item.id} item={item} selected={selected?.id === item.id} onSelect={onSelect} />)}
+export function ProductGrid({
+  items,
+  selected,
+  onSelect,
+}: {
+  items: Nominal[];
+  selected: Nominal | null;
+  onSelect: (item: Nominal) => void;
+}) {
+  if (items.length === 0) {
+    return (
+      <div className="py-8 text-center text-sm text-slate-400">
+        Tidak ada item di kategori ini.
       </div>
-    </section>
+    );
+  }
+  return (
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+      {items.map((item) => (
+        <ProductCard
+          key={item.id}
+          item={item}
+          selected={selected?.id === item.id}
+          onSelect={onSelect}
+        />
+      ))}
+    </div>
   );
 }
 
-export function PaymentMethods({ value, onChange }: { value: PaymentMethodKey; onChange: (method: PaymentMethodKey) => void; }) {
+export function PaymentMethods({
+  value,
+  onChange,
+}: {
+  value: PaymentMethodKey;
+  onChange: (method: PaymentMethodKey) => void;
+}) {
   return (
     <section className="rounded-[24px] border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
       <div className="mb-4 flex items-center gap-3">
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-violet-50 text-sm font-bold text-violet-600">3</span>
-        <h2 className="text-base font-semibold text-slate-900 sm:text-lg">Metode Pembayaran</h2>
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-red-50 text-sm font-bold text-red-600">
+          3
+        </span>
+        <div>
+          <h2 className="text-base font-bold text-slate-900 sm:text-lg">
+            Metode Pembayaran
+          </h2>
+          <p className="text-xs text-slate-400">Pilih salah satu metode di bawah</p>
+        </div>
       </div>
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
         {paymentMethods.map((method) => {
           const active = value === method.key;
           return (
-            <button key={method.key} type="button" onClick={() => onChange(method.key)} className={["flex items-center gap-2 rounded-2xl border px-4 py-3 text-left text-sm font-medium transition", active ? "border-red-200 bg-red-50 text-red-600" : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-800"].join(" ")}>
-              <span className="text-base leading-none">{method.icon}</span>
-              <span>{method.key}</span>
+            <button
+              key={method.key}
+              type="button"
+              onClick={() => onChange(method.key)}
+              className={[
+                "flex items-center gap-2.5 rounded-2xl border px-3 py-3 text-left text-sm font-semibold transition-all duration-150",
+                active
+                  ? "border-red-300 bg-red-50 text-red-700 shadow-sm ring-1 ring-red-200"
+                  : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-800",
+              ].join(" ")}
+            >
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center text-base leading-none">
+                {method.icon}
+              </span>
+              <span className="truncate text-sm">{method.key}</span>
+              {active && (
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" className="ml-auto shrink-0 text-red-600" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              )}
             </button>
           );
         })}
@@ -169,53 +396,165 @@ export function PaymentMethods({ value, onChange }: { value: PaymentMethodKey; o
   );
 }
 
-export function OrderPreview({ selected, userId, paymentMethod, pulse }: { selected: Nominal; userId: string; paymentMethod: PaymentMethodKey; pulse: boolean; }) {
+export function OrderPreview({
+  selected,
+  userId,
+  paymentMethod,
+  pulse,
+}: {
+  selected: Nominal;
+  userId: string;
+  paymentMethod: PaymentMethodKey;
+  pulse: boolean;
+}) {
   return (
-    <div className={["rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-transform", pulse ? "scale-[1.01]" : "scale-100"].join(" ")}>
-      <div className="space-y-2">
-        <div className="flex items-center justify-between gap-4 text-sm"><span className="text-slate-500">Item</span><span className="font-semibold text-slate-900">{selected.label}</span></div>
-        <div className="flex items-center justify-between gap-4 text-sm"><span className="text-slate-500">ID</span><span className="font-semibold text-slate-900">{userId || "—"}</span></div>
-        <div className="flex items-center justify-between gap-4 text-sm"><span className="text-slate-500">Bayar</span><span className="font-semibold text-slate-900">{paymentMethod}</span></div>
+    <div
+      className={[
+        "rounded-2xl border border-slate-200 bg-white shadow-sm transition-transform duration-150",
+        pulse ? "scale-[1.015]" : "scale-100",
+      ].join(" ")}
+    >
+      <div className="border-b border-slate-100 px-4 py-3">
+        <p className="text-xs font-bold uppercase tracking-wide text-slate-400">
+          Ringkasan Pesanan
+        </p>
+      </div>
+      <div className="space-y-2 px-4 py-3">
+        <div className="flex items-start justify-between gap-4 text-sm">
+          <span className="text-slate-400">Item</span>
+          <span className="text-right font-semibold text-slate-900">{selected.label}</span>
+        </div>
+        <div className="flex items-start justify-between gap-4 text-sm">
+          <span className="text-slate-400">User ID</span>
+          <span className="text-right font-semibold text-slate-900">{userId || "—"}</span>
+        </div>
+        <div className="flex items-start justify-between gap-4 text-sm">
+          <span className="text-slate-400">Pembayaran</span>
+          <span className="text-right font-semibold text-slate-900">{paymentMethod}</span>
+        </div>
         <div className="h-px bg-slate-100" />
-        <div className="flex items-center justify-between gap-4 pt-1"><span className="text-sm text-slate-500">Total</span><span className="text-2xl font-bold tracking-tight text-slate-900">{formatCurrency(selected.price)}</span></div>
+        <div className="flex items-center justify-between gap-4 pt-1">
+          <span className="text-sm text-slate-400">Total Bayar</span>
+          <span className="text-2xl font-bold tracking-tight text-slate-900">
+            {formatCurrency(selected.price)}
+          </span>
+        </div>
       </div>
     </div>
   );
 }
 
-export function StickyOrderButton({ disabled, onClick }: { disabled: boolean; onClick: () => void; }) {
+export function StickyOrderButton({
+  disabled,
+  onClick,
+}: {
+  disabled: boolean;
+  onClick: () => void;
+}) {
   return (
-    <button type="button" disabled={disabled} onClick={onClick} className={["flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-4 text-sm font-semibold transition", disabled ? "cursor-not-allowed bg-slate-100 text-slate-400" : "bg-black text-white hover:-translate-y-0.5 hover:bg-slate-800"].join(" ")}>
+    <button
+      type="button"
+      disabled={disabled}
+      onClick={onClick}
+      className={[
+        "flex w-full items-center justify-center gap-2.5 rounded-2xl px-5 py-4 text-sm font-bold shadow-sm transition-all duration-200",
+        disabled
+          ? "cursor-not-allowed bg-slate-100 text-slate-400"
+          : "bg-slate-900 text-white hover:-translate-y-0.5 hover:bg-slate-700 hover:shadow-md",
+      ].join(" ")}
+    >
       <WAIcon size={18} />
-      <span>{disabled ? "Pilih Item Terlebih Dahulu" : "Order via WhatsApp"}</span>
+      <span>
+        {disabled ? "Pilih Item Terlebih Dahulu" : "Order via WhatsApp"}
+      </span>
     </button>
   );
 }
 
+// ─── Main Page ────────────────────────────────────────────────────────────────
+
 export default function FreeFire() {
-  const { activeCategory, setActiveCategory, selected, userId, setUserId, nickname, setNickname, showHowTo, setShowHowTo, pulse, paymentMethod, setPaymentMethod, filteredProducts, categoryTabsRef, handleSelect, handleOrder } = useFreeFireOrder();
+  const {
+    activeCategory,
+    setActiveCategory,
+    selected,
+    userId,
+    setUserId,
+    nickname,
+    setNickname,
+    showHowTo,
+    setShowHowTo,
+    pulse,
+    paymentMethod,
+    setPaymentMethod,
+    filteredProducts,
+    categoryTabsRef,
+    handleSelect,
+    handleOrder,
+  } = useFreeFireOrder();
 
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-6 text-slate-900 sm:px-6 lg:px-8">
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 pb-28">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 pb-48">
         <FreeFireHeader />
         <HowToOrder open={showHowTo} onToggle={() => setShowHowTo((v) => !v)} />
-        <UserIdForm userId={userId} onUserIdChange={setUserId} nickname={nickname} onNicknameChange={setNickname} />
-        <section className="rounded-[24px] border border-slate-200 bg-white p-4 shadow-sm">
+
+        {/* Step 1: ID */}
+        <UserIdForm
+          userId={userId}
+          onUserIdChange={setUserId}
+          nickname={nickname}
+          onNicknameChange={setNickname}
+        />
+
+        {/* Step 2: Pilih Item */}
+        <section className="rounded-[24px] border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
           <div className="mb-4 flex items-center gap-3">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-red-50 text-sm font-bold text-red-600">2</span>
-            <h2 className="text-base font-semibold text-slate-900 sm:text-lg">Pilih Item</h2>
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-red-50 text-sm font-bold text-red-600">
+              2
+            </span>
+            <div>
+              <h2 className="text-base font-bold text-slate-900 sm:text-lg">Pilih Item</h2>
+              <p className="text-xs text-slate-400">Geser untuk lihat semua kategori</p>
+            </div>
           </div>
-          <CategoryTabs activeCategory={activeCategory} onChange={setActiveCategory} tabsRef={categoryTabsRef} />
-          <div className="mt-4 rounded-2xl bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">{categories.find((c) => c.key === activeCategory)?.label}</div>
-          <div className="mt-4"><ProductGrid items={filteredProducts} selected={selected} onSelect={handleSelect} /></div>
+
+          <CategoryTabs
+            activeCategory={activeCategory}
+            onChange={setActiveCategory}
+            tabsRef={categoryTabsRef}
+          />
+
+          <div className="mt-3 rounded-xl bg-slate-50 px-4 py-2.5">
+            <span className="text-xs font-bold uppercase tracking-wide text-slate-500">
+              {categories.find((c) => c.key === activeCategory)?.label}
+            </span>
+          </div>
+
+          <div className="mt-3">
+            <ProductGrid
+              items={filteredProducts}
+              selected={selected}
+              onSelect={handleSelect}
+            />
+          </div>
         </section>
+
+        {/* Step 3: Pembayaran */}
         <PaymentMethods value={paymentMethod} onChange={setPaymentMethod} />
-        {selected && <OrderPreview selected={selected} userId={userId} paymentMethod={paymentMethod} pulse={pulse} />}
       </div>
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 px-4 py-4 backdrop-blur">
-        <div className="mx-auto w-full max-w-5xl">
-          {selected && <div className="mb-3"><OrderPreview selected={selected} userId={userId} paymentMethod={paymentMethod} pulse={pulse} /></div>}
+
+      {/* Sticky Bottom Bar */}
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 px-4 py-4 backdrop-blur-md">
+        <div className="mx-auto w-full max-w-5xl space-y-3">
+          {selected && (
+            <OrderPreview
+              selected={selected}
+              userId={userId}
+              paymentMethod={paymentMethod}
+              pulse={pulse}
+            />
+          )}
           <StickyOrderButton disabled={!selected} onClick={handleOrder} />
         </div>
       </div>

@@ -34,16 +34,16 @@ export default function MobileLegendsPage() {
   } = useMobileLegendsOrder();
 
   const currentCategoryLabel =
-    categories.find((category) => category.key === activeCategory)?.label ??
-    "Diamonds";
+    categories.find((c) => c.key === activeCategory)?.label ?? "Diamonds";
 
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-6 text-slate-900 sm:px-6 lg:px-8">
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 pb-44">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 pb-48">
         <MobileLegendsHeader />
 
         <HowToOrder open={showHowTo} onToggle={() => setShowHowTo((v) => !v)} />
 
+        {/* Step 1: ID */}
         <UserIdForm
           userId={userId}
           onUserIdChange={setUserId}
@@ -53,14 +53,16 @@ export default function MobileLegendsPage() {
           onNicknameChange={setNickname}
         />
 
-        <section className="rounded-[24px] border border-slate-200 bg-white p-4 shadow-sm">
+        {/* Step 2: Pilih Item */}
+        <section className="rounded-[24px] border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
           <div className="mb-4 flex items-center gap-3">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-red-50 text-sm font-bold text-red-600">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-violet-50 text-sm font-bold text-violet-600">
               2
             </span>
-            <h2 className="text-base font-semibold text-slate-900 sm:text-lg">
-              Pilih Item
-            </h2>
+            <div>
+              <h2 className="text-base font-bold text-slate-900 sm:text-lg">Pilih Item</h2>
+              <p className="text-xs text-slate-400">Geser untuk lihat semua kategori</p>
+            </div>
           </div>
 
           <CategoryTabs
@@ -69,11 +71,13 @@ export default function MobileLegendsPage() {
             tabsRef={categoryTabsRef}
           />
 
-          <div className="mt-4 rounded-2xl bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">
-            {currentCategoryLabel}
+          <div className="mt-3 rounded-xl bg-slate-50 px-4 py-2.5">
+            <span className="text-xs font-bold uppercase tracking-wide text-slate-500">
+              {currentCategoryLabel}
+            </span>
           </div>
 
-          <div className="mt-4">
+          <div className="mt-3">
             <ProductGrid
               items={filteredProducts}
               selected={selected}
@@ -82,25 +86,22 @@ export default function MobileLegendsPage() {
           </div>
         </section>
 
+        {/* Step 3: Pembayaran */}
         <PaymentMethods value={paymentMethod} onChange={setPaymentMethod} />
-
-        <div className="h-1" />
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 px-4 py-4 backdrop-blur">
-        <div className="mx-auto w-full max-w-5xl">
-          {selected ? (
-            <div className="mb-3">
-              <OrderPreview
-                selected={selected}
-                userId={userId}
-                serverId={serverId}
-                paymentMethod={paymentMethod}
-                pulse={pulse}
-              />
-            </div>
-          ) : null}
-
+      {/* Sticky Bottom Bar */}
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 px-4 py-4 backdrop-blur-md">
+        <div className="mx-auto w-full max-w-5xl space-y-3">
+          {selected && (
+            <OrderPreview
+              selected={selected}
+              userId={userId}
+              serverId={serverId}
+              paymentMethod={paymentMethod}
+              pulse={pulse}
+            />
+          )}
           <StickyOrderButton disabled={!selected} onClick={handleOrder} />
         </div>
       </div>
