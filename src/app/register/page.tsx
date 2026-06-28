@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { useAuth } from "@/contexts/AuthContext";
 
 function EyeIcon({ open }: { open: boolean }) {
@@ -41,9 +42,25 @@ function EyeIcon({ open }: { open: boolean }) {
 
 function Spinner() {
   return (
-    <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+    <svg
+      className="h-4 w-4 animate-spin"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+    >
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      />
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+      />
     </svg>
   );
 }
@@ -102,10 +119,12 @@ export default function RegisterPage() {
       <div className="w-full max-w-sm">
         {/* Logo */}
         <Link href="/" className="mb-8 flex flex-col items-center gap-3">
-          <img
+          <Image
             src="/zaz.avif"
             alt="ZazStore"
-            className="h-14 w-14 rounded-2xl object-cover shadow-md ring-1 ring-slate-200"
+            width={56}
+            height={56}
+            className="rounded-2xl object-cover shadow-md ring-1 ring-slate-200"
           />
           <div className="text-center leading-tight">
             <p className="text-xl font-bold text-slate-900">ZazStoreId</p>
@@ -116,12 +135,24 @@ export default function RegisterPage() {
         <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="mb-6">
             <h1 className="text-xl font-bold text-slate-900">Buat Akun Baru</h1>
-            <p className="mt-1 text-sm text-slate-500">Gratis dan tanpa biaya apapun</p>
+            <p className="mt-1 text-sm text-slate-500">
+              Gratis dan tanpa biaya apapun
+            </p>
           </div>
 
           {error && (
             <div className="mb-4 flex items-center gap-2.5 rounded-xl border border-red-200 bg-red-50 p-3 text-sm font-medium text-red-600">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
                 <circle cx="12" cy="12" r="10" />
                 <line x1="12" y1="8" x2="12" y2="12" />
                 <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -177,7 +208,9 @@ export default function RegisterPage() {
                   onClick={() => setShowPassword((v) => !v)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 transition hover:text-slate-600"
                   tabIndex={-1}
-                  aria-label={showPassword ? "Sembunyikan password" : "Tampilkan password"}
+                  aria-label={
+                    showPassword ? "Sembunyikan password" : "Tampilkan password"
+                  }
                 >
                   <EyeIcon open={showPassword} />
                 </button>
@@ -191,12 +224,16 @@ export default function RegisterPage() {
                       <div
                         key={i}
                         className={`h-1 flex-1 rounded-full transition-colors duration-300 ${
-                          i <= passwordStrength ? strengthMeta.color : "bg-slate-200"
+                          i <= passwordStrength
+                            ? strengthMeta.color
+                            : "bg-slate-200"
                         }`}
                       />
                     ))}
                   </div>
-                  <span className={`text-xs font-semibold ${strengthMeta.text}`}>
+                  <span
+                    className={`text-xs font-semibold ${strengthMeta.text}`}
+                  >
                     {strengthMeta.label}
                   </span>
                 </div>

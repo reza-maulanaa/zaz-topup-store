@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, Suspense } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
@@ -99,10 +100,12 @@ function LoginForm() {
       <div className="w-full max-w-sm">
         {/* Logo */}
         <Link href="/" className="mb-8 flex flex-col items-center gap-3">
-          <img
+          <Image
             src="/zaz.avif"
             alt="ZazStore"
-            className="h-14 w-14 rounded-2xl object-cover shadow-md ring-1 ring-slate-200"
+            width={56}
+            height={56}
+            className="rounded-2xl object-cover shadow-md ring-1 ring-slate-200"
           />
           <div className="text-center leading-tight">
             <p className="text-xl font-bold text-slate-900">ZazStoreId</p>
@@ -113,12 +116,24 @@ function LoginForm() {
         <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="mb-6">
             <h1 className="text-xl font-bold text-slate-900">Masuk ke Akun</h1>
-            <p className="mt-1 text-sm text-slate-500">Selamat datang kembali!</p>
+            <p className="mt-1 text-sm text-slate-500">
+              Selamat datang kembali!
+            </p>
           </div>
 
           {registered && (
             <div className="mb-4 flex items-center gap-2.5 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm font-medium text-emerald-700">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
                 <polyline points="20 6 9 17 4 12" />
               </svg>
               Registrasi berhasil! Silakan masuk.
@@ -127,7 +142,17 @@ function LoginForm() {
 
           {error && (
             <div className="mb-4 flex items-center gap-2.5 rounded-xl border border-red-200 bg-red-50 p-3 text-sm font-medium text-red-600">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
                 <circle cx="12" cy="12" r="10" />
                 <line x1="12" y1="8" x2="12" y2="12" />
                 <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -169,7 +194,9 @@ function LoginForm() {
                   onClick={() => setShowPassword((v) => !v)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 transition hover:text-slate-600"
                   tabIndex={-1}
-                  aria-label={showPassword ? "Sembunyikan password" : "Tampilkan password"}
+                  aria-label={
+                    showPassword ? "Sembunyikan password" : "Tampilkan password"
+                  }
                 >
                   <EyeIcon open={showPassword} />
                 </button>

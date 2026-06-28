@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function MobileLegendsHeader() {
   return (
     <section className="relative overflow-hidden rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
@@ -6,11 +8,12 @@ export default function MobileLegendsHeader() {
       <div className="pointer-events-none absolute -bottom-6 -left-4 h-28 w-28 rounded-full bg-sky-100/60 blur-3xl" />
 
       <div className="relative flex items-center gap-4">
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl shadow-md ring-1 ring-slate-100 sm:h-[72px] sm:w-[72px]">
-          <img
+        <div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl shadow-md ring-1 ring-slate-100 sm:h-[72px] sm:w-[72px]">
+          <Image
             src="/ml.avif"
             alt="Mobile Legends"
-            className="h-full w-full object-cover"
+            fill
+            className="object-cover"
           />
         </div>
 

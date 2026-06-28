@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 
 type ActiveGame = "free-fire" | "mobile-legends" | null;
@@ -73,11 +74,14 @@ export function Game({ activeGame, onGameSelect }: GameProps) {
                     : "border-slate-200 hover:scale-[1.03] hover:border-slate-300 hover:shadow-md"
                 }`}
               >
-                <img
-                  src={game.image}
-                  alt={game.name}
-                  className="h-28 w-28 object-cover transition duration-300 group-hover:scale-105 sm:h-32 sm:w-32 md:h-36 md:w-36"
-                />
+                <div className="relative h-28 w-28 sm:h-32 sm:w-32 md:h-36 md:w-36">
+                  <Image
+                    src={game.image}
+                    alt={game.name}
+                    fill
+                    className="object-cover transition duration-300 group-hover:scale-105"
+                  />
+                </div>
 
                 {isActive && (
                   <div className="absolute bottom-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-md">
