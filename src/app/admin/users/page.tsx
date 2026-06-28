@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { adminApi } from "@/services/api";
 
@@ -22,8 +22,19 @@ function LoadingSpinner() {
           fill="none"
           aria-hidden="true"
         >
-          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          />
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+          />
         </svg>
         <p className="text-sm text-slate-400">Memuat data users...</p>
       </div>
@@ -51,20 +62,25 @@ export default function AdminUsersPage() {
   const [error, setError] = useState("");
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const fetchUsers = () => {
+  const fetchUsers = useCallback(() => {
     setUsers(null);
     adminApi
       .users()
       .then((res) => setUsers(res.users))
       .catch((err) => setError(err.message));
-  };
+  }, []);
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [fetchUsers]);
 
   const handleDelete = async (id: string, name: string) => {
-    if (!window.confirm(`Hapus user "${name}"? Tindakan ini tidak bisa dibatalkan.`)) return;
+    if (
+      !window.confirm(
+        `Hapus user "${name}"? Tindakan ini tidak bisa dibatalkan.`,
+      )
+    )
+      return;
     setDeletingId(id);
     try {
       await adminApi.deleteUser(id);
@@ -83,7 +99,10 @@ export default function AdminUsersPage() {
           <p className="font-bold text-red-700">Gagal memuat data</p>
           <p className="mt-1 text-sm text-red-500">{error}</p>
           <button
-            onClick={() => { setError(""); fetchUsers(); }}
+            onClick={() => {
+              setError("");
+              fetchUsers();
+            }}
             className="mt-4 rounded-xl bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-700"
           >
             Coba Lagi
@@ -121,7 +140,17 @@ export default function AdminUsersPage() {
             onClick={() => router.push("/admin")}
             className="flex items-center gap-2 self-start rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 sm:self-auto"
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
               <line x1="19" y1="12" x2="5" y2="12" />
               <polyline points="12 19 5 12 12 5" />
             </svg>
@@ -134,11 +163,21 @@ export default function AdminUsersPage() {
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-slate-100 bg-slate-50/80">
-                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wide text-slate-400">User</th>
-                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wide text-slate-400">Email</th>
-                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wide text-slate-400">Role</th>
-                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wide text-slate-400">Bergabung</th>
-                <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wide text-slate-400">Aksi</th>
+                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wide text-slate-400">
+                  User
+                </th>
+                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wide text-slate-400">
+                  Email
+                </th>
+                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wide text-slate-400">
+                  Role
+                </th>
+                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wide text-slate-400">
+                  Bergabung
+                </th>
+                <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wide text-slate-400">
+                  Aksi
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
@@ -147,7 +186,9 @@ export default function AdminUsersPage() {
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <UserAvatar name={user.name} />
-                      <span className="font-semibold text-slate-900">{user.name}</span>
+                      <span className="font-semibold text-slate-900">
+                        {user.name}
+                      </span>
                     </div>
                   </td>
                   <td className="px-6 py-4 text-slate-500">{user.email}</td>
@@ -186,7 +227,9 @@ export default function AdminUsersPage() {
           </table>
           {users.length === 0 && (
             <div className="px-6 py-16 text-center">
-              <p className="text-sm text-slate-400">Belum ada user terdaftar.</p>
+              <p className="text-sm text-slate-400">
+                Belum ada user terdaftar.
+              </p>
             </div>
           )}
         </div>
@@ -203,7 +246,9 @@ export default function AdminUsersPage() {
                   <UserAvatar name={user.name} />
                   <div className="min-w-0">
                     <p className="font-semibold text-slate-900">{user.name}</p>
-                    <p className="truncate text-xs text-slate-400">{user.email}</p>
+                    <p className="truncate text-xs text-slate-400">
+                      {user.email}
+                    </p>
                   </div>
                 </div>
                 <span
@@ -218,7 +263,8 @@ export default function AdminUsersPage() {
               </div>
               <div className="flex items-center justify-between border-t border-slate-50 px-4 py-3">
                 <p className="text-xs text-slate-400">
-                  Bergabung {new Date(user.createdAt).toLocaleDateString("id-ID")}
+                  Bergabung{" "}
+                  {new Date(user.createdAt).toLocaleDateString("id-ID")}
                 </p>
                 {user.role !== "admin" && (
                   <button
@@ -234,7 +280,9 @@ export default function AdminUsersPage() {
           ))}
           {users.length === 0 && (
             <div className="rounded-2xl border border-slate-200 bg-white p-12 text-center shadow-sm">
-              <p className="text-sm text-slate-400">Belum ada user terdaftar.</p>
+              <p className="text-sm text-slate-400">
+                Belum ada user terdaftar.
+              </p>
             </div>
           )}
         </div>
