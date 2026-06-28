@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 function HamburgerIcon({ open }: { open: boolean }) {
   return (
@@ -81,11 +82,14 @@ export function Header() {
           className="group flex items-center gap-3"
           onClick={() => setMenuOpen(false)}
         >
-          <img
-            src="/zaz.avif"
-            alt="ZazStore"
-            className="h-10 w-10 rounded-xl object-cover shadow-sm ring-1 ring-slate-200 transition duration-200 group-hover:scale-105 sm:h-11 sm:w-11 lg:h-12 lg:w-12"
-          />
+          <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl shadow-sm ring-1 ring-slate-200 sm:h-11 sm:w-11 lg:h-12 lg:w-12">
+            <Image
+              src="/zaz.avif"
+              alt="ZazStore"
+              fill
+              className="object-cover transition duration-200 group-hover:scale-105"
+            />
+          </div>
           <div className="leading-tight">
             <p className="text-base font-bold tracking-tight text-slate-900 sm:text-lg">
               ZazStoreId
