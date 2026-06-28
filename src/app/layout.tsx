@@ -3,7 +3,7 @@ import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 
 export const metadata: Metadata = {
-  title: "ZAZ Store - Top Up Game Murah & Terpercaya",
+  title: "ZazStore - Top Up Game Murah & Terpercaya",
   description: "Top up game favorit kamu dengan harga terjangkau. Free Fire, Mobile Legends, dan game lainnya tersedia di ZAZ Store.",
   icons: {
     icon: "/favicon/zaz.avif",
