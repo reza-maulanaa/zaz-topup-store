@@ -1,21 +1,30 @@
 import { NextResponse } from "next/server";
-import { getAuthUser } from "@/lib/auth";
-import prisma from "@/lib/prisma";
+import { getAuthUser, clearAuthCookie } from "@/lib/auth";
+import { db } from "@/lib/db";
+import { users } from "@/lib/schema";
+import { eq } from "drizzle-orm";
 
-export async function GET() {
+export async function DELETE() {
   try {
     const user = await getAuthUser();
-    if (!user || user.role !== "admin") {
-      return NextResponse.json({ success: false, message: "Akses ditolak" }, { status: 403 });
+    if (!user) {
+      return NextResponse.json(
+        { success: false, message: "Tidak terautentikasi" },
+        { status: 401 },
+      );
     }
 
-    const users = await prisma.user.findMany({
-      select: { id: true, name: true, email: true, role: true, createdAt: true, updatedAt: true },
-      orderBy: { createdAt: "desc" },
-    });
+    await db.delete(users).where(eq(users.id, user.id));
+    await clearAuthCookie();
 
-    return NextResponse.json({ success: true, users });
+    return NextResponse.json({
+      success: true,
+      message: "Akun berhasil dihapus",
+    });
   } catch {
-    return NextResponse.json({ success: false, message: "Terjadi kesalahan server" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, message: "Terjadi kesalahan server" },
+      { status: 500 },
+    );
   }
 }

@@ -1,19 +1,30 @@
 import { NextResponse } from "next/server";
 import { getAuthUser, clearAuthCookie } from "@/lib/auth";
-import prisma from "@/lib/prisma";
+import { db } from "@/lib/db";
+import { users } from "@/lib/schema";
+import { eq } from "drizzle-orm";
 
 export async function DELETE() {
   try {
     const user = await getAuthUser();
     if (!user) {
-      return NextResponse.json({ success: false, message: "Tidak terautentikasi" }, { status: 401 });
+      return NextResponse.json(
+        { success: false, message: "Tidak terautentikasi" },
+        { status: 401 },
+      );
     }
 
-    await prisma.user.delete({ where: { id: user.id } });
+    await db.delete(users).where(eq(users.id, user.id));
     await clearAuthCookie();
 
-    return NextResponse.json({ success: true, message: "Akun berhasil dihapus" });
+    return NextResponse.json({
+      success: true,
+      message: "Akun berhasil dihapus",
+    });
   } catch {
-    return NextResponse.json({ success: false, message: "Terjadi kesalahan server" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, message: "Terjadi kesalahan server" },
+      { status: 500 },
+    );
   }
 }

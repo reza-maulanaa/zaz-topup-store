@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
-import prisma from "./prisma";
+import { db } from "./db";
+import { users } from "./schema";
+import { eq } from "drizzle-orm";
 
 export type JWTPayload = {
   id: string;
@@ -59,11 +61,19 @@ export async function getAuthUser(): Promise<AuthUser | null> {
     if (!token) return null;
 
     const decoded = verifyToken(token);
-    const user = await prisma.user.findUnique({
-      where: { id: decoded.id },
-      select: { id: true, name: true, email: true, role: true },
-    });
-    return user;
+
+    const result = await db
+      .select({
+        id: users.id,
+        name: users.name,
+        email: users.email,
+        role: users.role,
+      })
+      .from(users)
+      .where(eq(users.id, decoded.id))
+      .limit(1);
+
+    return result[0] ?? null;
   } catch {
     return null;
   }
