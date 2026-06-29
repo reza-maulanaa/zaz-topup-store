@@ -112,10 +112,10 @@ function LinkCard({
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="group flex items-center gap-3 border border-blue-100 bg-white p-3 transition duration-200 hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-sm"
+      className="group flex items-center gap-2.5 border border-blue-100 bg-white p-2 transition duration-200 hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-sm"
     >
       <div
-        className={`flex h-11 w-11 shrink-0 items-center justify-center ring-1 transition duration-200 ${iconBg}`}
+        className={`flex h-8 w-8 shrink-0 items-center justify-center ring-1 transition duration-200 ${iconBg}`}
       >
         {icon}
       </div>
@@ -143,12 +143,12 @@ function LinkCard({
 export function Footer() {
   return (
     <footer id="footer" className="border-t border-blue-200 bg-blue-50">
-      <div className="mx-auto max-w-7xl px-4 py-12 md:px-8">
-        <div className="grid gap-10 lg:grid-cols-3">
+      <div className="mx-auto max-w-7xl px-4 py-8 md:px-8">
+        <div className="grid gap-6 lg:grid-cols-3">
           {/* Brand */}
           <section className="lg:col-span-1">
             <div className="flex items-center gap-3">
-              <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden border border-blue-200 bg-white shadow-sm">
+              <div className="relative flex h-9 w-9 items-center justify-center overflow-hidden border border-blue-200 bg-white shadow-sm">
                 <Image
                   src="/zaz.avif"
                   alt="ZazStore"
@@ -164,28 +164,22 @@ export function Footer() {
               </div>
             </div>
 
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-500">
-              Top up game jadi lebih mudah, cepat, dan aman. Tersedia Mobile
-              Legends, Free Fire, dan game populer lainnya dengan proses simpel
-              via WhatsApp.
-            </p>
-
             <a
               href={`https://wa.me/${WA}`}
               target="_blank"
               rel="noreferrer"
-              className="mt-5 inline-flex items-center gap-2 border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100"
+              className="mt-3 inline-flex items-center gap-2 border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100"
             >
-              <WAIcon size={16} />+{WA}
+              <WAIcon size={14} />+{WA}
             </a>
           </section>
 
           {/* Contact */}
           <section>
-            <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-blue-600">
+            <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-blue-600">
               Kontak
             </h3>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
               {contactLinks.map((link) => (
                 <LinkCard key={link.label} {...link} />
               ))}
@@ -194,10 +188,10 @@ export function Footer() {
 
           {/* Social */}
           <section>
-            <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-blue-600">
+            <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-blue-600">
               Ikuti Kami
             </h3>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
               {socialLinks.map((link) => (
                 <LinkCard key={link.label} {...link} />
               ))}
@@ -205,7 +199,7 @@ export function Footer() {
           </section>
         </div>
 
-        <div className="mt-10 flex flex-col items-start justify-between gap-2 border-t border-blue-200 pt-6 sm:flex-row sm:items-center">
+        <div className="mt-6 flex flex-col items-start justify-between gap-1 border-t border-blue-200 pt-4 sm:flex-row sm:items-center">
           <p className="text-sm text-slate-400">
             © 2025 ZazStore.ID · Semua transaksi diproses manual via WhatsApp
           </p>
