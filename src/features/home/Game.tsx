@@ -35,7 +35,7 @@ type GameProps = {
 
 export function Game({ activeGame, onGameSelect }: GameProps) {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-12 md:px-8">
+    <section className="mx-auto max-w-7xl px-4 pt-12 pb-4 md:px-8">
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
