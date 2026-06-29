@@ -124,7 +124,7 @@ export default function RegisterPage() {
             alt="ZazStore"
             width={56}
             height={56}
-            className="rounded-2xl object-cover shadow-md ring-1 ring-slate-200"
+            className="object-cover shadow-md ring-1 ring-slate-200"
           />
           <div className="text-center leading-tight">
             <p className="text-xl font-bold text-slate-900">ZazStoreId</p>
@@ -132,7 +132,7 @@ export default function RegisterPage() {
           </div>
         </Link>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div className="border border-slate-200 bg-white p-6 shadow-sm">
           <div className="mb-6">
             <h1 className="text-xl font-bold text-slate-900">Buat Akun Baru</h1>
             <p className="mt-1 text-sm text-slate-500">
@@ -141,7 +141,7 @@ export default function RegisterPage() {
           </div>
 
           {error && (
-            <div className="mb-4 flex items-center gap-2.5 rounded-xl border border-red-200 bg-red-50 p-3 text-sm font-medium text-red-600">
+            <div className="mb-4 flex items-center gap-2.5 border border-red-200 bg-red-50 p-3 text-sm font-medium text-red-600">
               <svg
                 width="16"
                 height="16"
@@ -170,7 +170,7 @@ export default function RegisterPage() {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none placeholder:text-slate-300 transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-100"
+                className="w-full border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none placeholder:text-slate-300 transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-100"
                 placeholder="Nama kamu"
                 autoComplete="name"
               />
@@ -184,7 +184,7 @@ export default function RegisterPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none placeholder:text-slate-300 transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-100"
+                className="w-full border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none placeholder:text-slate-300 transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-100"
                 placeholder="nama@email.com"
                 autoComplete="email"
               />
@@ -199,7 +199,7 @@ export default function RegisterPage() {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 pr-12 text-sm text-slate-900 outline-none placeholder:text-slate-300 transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-100"
+                  className="w-full border border-slate-200 bg-slate-50 px-4 py-3 pr-12 text-sm text-slate-900 outline-none placeholder:text-slate-300 transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-100"
                   placeholder="Min. 8 karakter"
                   autoComplete="new-password"
                 />
@@ -223,7 +223,7 @@ export default function RegisterPage() {
                     {[1, 2, 3].map((i) => (
                       <div
                         key={i}
-                        className={`h-1 flex-1 rounded-full transition-colors duration-300 ${
+                        className={`h-1 flex-1 transition-colors duration-300 ${
                           i <= passwordStrength
                             ? strengthMeta.color
                             : "bg-slate-200"
@@ -243,7 +243,7 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={loading}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-700 hover:shadow disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex w-full items-center justify-center gap-2 bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-700 hover:shadow disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading ? (
                 <>

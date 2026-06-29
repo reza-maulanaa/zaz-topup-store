@@ -105,7 +105,7 @@ function LoginForm() {
             alt="ZazStore"
             width={56}
             height={56}
-            className="rounded-2xl object-cover shadow-md ring-1 ring-slate-200"
+            className="object-cover shadow-md ring-1 ring-slate-200"
           />
           <div className="text-center leading-tight">
             <p className="text-xl font-bold text-slate-900">ZazStoreId</p>
@@ -113,7 +113,7 @@ function LoginForm() {
           </div>
         </Link>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div className="border border-slate-200 bg-white p-6 shadow-sm">
           <div className="mb-6">
             <h1 className="text-xl font-bold text-slate-900">Masuk ke Akun</h1>
             <p className="mt-1 text-sm text-slate-500">
@@ -122,7 +122,7 @@ function LoginForm() {
           </div>
 
           {registered && (
-            <div className="mb-4 flex items-center gap-2.5 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm font-medium text-emerald-700">
+            <div className="mb-4 flex items-center gap-2.5 border border-emerald-200 bg-emerald-50 p-3 text-sm font-medium text-emerald-700">
               <svg
                 width="16"
                 height="16"
@@ -141,7 +141,7 @@ function LoginForm() {
           )}
 
           {error && (
-            <div className="mb-4 flex items-center gap-2.5 rounded-xl border border-red-200 bg-red-50 p-3 text-sm font-medium text-red-600">
+            <div className="mb-4 flex items-center gap-2.5 border border-red-200 bg-red-50 p-3 text-sm font-medium text-red-600">
               <svg
                 width="16"
                 height="16"
@@ -170,7 +170,7 @@ function LoginForm() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none placeholder:text-slate-300 transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-100"
+                className="w-full border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none placeholder:text-slate-300 transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-100"
                 placeholder="nama@email.com"
                 autoComplete="email"
               />
@@ -185,7 +185,7 @@ function LoginForm() {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 pr-12 text-sm text-slate-900 outline-none placeholder:text-slate-300 transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-100"
+                  className="w-full border border-slate-200 bg-slate-50 px-4 py-3 pr-12 text-sm text-slate-900 outline-none placeholder:text-slate-300 transition focus:border-slate-400 focus:bg-white focus:ring-2 focus:ring-slate-100"
                   placeholder="Masukkan password"
                   autoComplete="current-password"
                 />
@@ -206,7 +206,7 @@ function LoginForm() {
             <button
               type="submit"
               disabled={loading}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-700 hover:shadow disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex w-full items-center justify-center gap-2 bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-700 hover:shadow disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading ? (
                 <>

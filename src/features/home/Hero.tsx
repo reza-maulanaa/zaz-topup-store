@@ -67,11 +67,13 @@ const TRUST_ITEMS = [
 type HeroSectionOneProps = {
   onTopUpClick: () => void;
   onContactClick: () => void;
+  onGameSelect?: (slug: "free-fire" | "mobile-legends") => void;
 };
 
 export default function HeroSectionOne({
   onTopUpClick,
   onContactClick,
+  onGameSelect,
 }: HeroSectionOneProps) {
   return (
     <section className="mx-auto max-w-7xl overflow-hidden px-4 pb-8 pt-10 md:px-8 md:pb-12 md:pt-16">
@@ -177,7 +179,7 @@ export default function HeroSectionOne({
           transition={{ duration: 0.4, delay: 0.9 }}
           className="order-2 flex justify-center lg:justify-end"
         >
-          <FloatingGameCards />
+          <FloatingGameCards onSelect={onGameSelect} />
         </motion.div>
       </div>
     </section>
