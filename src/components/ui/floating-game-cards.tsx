@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef } from "react";
 import { motion } from "motion/react";
 import Image from "next/image";
 
@@ -28,10 +27,8 @@ export function FloatingGameCards({
 }: {
   onSelect?: (slug: "free-fire" | "mobile-legends") => void;
 }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
   return (
-    <div ref={containerRef} className="relative h-[320px] w-full">
+    <div className="relative h-[320px] w-full">
       {cards.map((card, i) => (
         /* Float wrapper — hanya animasi naik-turun */
         <motion.div
@@ -45,16 +42,7 @@ export function FloatingGameCards({
           }}
           className={`absolute ${i === 0 ? "left-8 top-4" : "left-32 top-28"}`}
         >
-          {/* Drag layer — terpisah dari float */}
-          <motion.div
-            drag
-            dragConstraints={containerRef}
-            dragElastic={0.15}
-            dragMomentum={false}
-            whileDrag={{ scale: 1.05, zIndex: 50 }}
-            style={{ cursor: "grab" }}
-            className="w-48 overflow-hidden border border-zinc-200 shadow-md"
-          >
+          <div className="w-48 overflow-hidden border border-zinc-200 shadow-md">
             {/* Full image */}
             <div className="relative h-56 w-full bg-zinc-100">
               <Image
@@ -76,7 +64,6 @@ export function FloatingGameCards({
                 <div className="mt-2 flex items-center justify-between">
                   <span className="text-xs text-white/70">{card.price}</span>
                   <button
-                    onPointerDown={(e) => e.stopPropagation()}
                     onClick={() => onSelect?.(card.slug)}
                     className="bg-red-600 px-2 py-0.5 text-[10px] font-semibold text-white hover:bg-red-700 transition-colors"
                     style={{ cursor: "pointer" }}
@@ -86,7 +73,7 @@ export function FloatingGameCards({
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       ))}
 
