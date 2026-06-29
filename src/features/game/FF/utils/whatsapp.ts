@@ -10,17 +10,21 @@ export function createWhatsAppOrderMessage(params: {
   userId: string;
   nickname: string;
   paymentMethod: PaymentMethodKey;
+  codLocation?: string;
 }) {
-  const { selected, userId, nickname, paymentMethod } = params;
+  const { selected, userId, nickname, paymentMethod, codLocation } = params;
   const id = userId || "Belum diisi";
   const nick = nickname || "Belum diisi";
+  const locationLine = paymentMethod === "COD" && codLocation
+    ? `\nLokasi COD : ${codLocation}`
+    : "";
 
   return encodeURIComponent(
     `Halo Min Zaz! Order Free Fire:\n\n` +
       `Item     : ${selected.label}\n` +
       `User ID  : ${id}\n` +
       `Nickname : ${nick}\n` +
-      `Bayar    : ${paymentMethod}\n` +
+      `Bayar    : ${paymentMethod}${locationLine}\n` +
       `Harga    : ${formatCurrency(selected.price)}\n\n` +
       `Mohon konfirmasi. Terima kasih!`,
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { CodLocationChat } from "@/components/ui/CodLocationChat";
 import type { RefObject } from "react";
 import type {
   CategoryKey,
@@ -541,6 +542,8 @@ export default function FreeFire() {
     pulse,
     paymentMethod,
     setPaymentMethod,
+    codLocation,
+    setCodLocation,
     filteredProducts,
     categoryTabsRef,
     handleSelect,
@@ -600,6 +603,10 @@ export default function FreeFire() {
 
         {/* Step 3: Pembayaran */}
         <PaymentMethods value={paymentMethod} onChange={setPaymentMethod} />
+
+        {paymentMethod === "COD" && (
+          <CodLocationChat value={codLocation} onChange={setCodLocation} />
+        )}
       </div>
 
       {/* Sticky Bottom Bar */}

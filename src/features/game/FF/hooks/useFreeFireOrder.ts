@@ -13,6 +13,7 @@ export function useFreeFireOrder() {
   const [pulse, setPulse] = useState(false);
   const [paymentMethod, setPaymentMethod] =
     useState<PaymentMethodKey>(defaultPaymentMethod);
+  const [codLocation, setCodLocation] = useState("");
 
   const categoryTabsRef = useRef<HTMLDivElement>(null);
 
@@ -48,6 +49,7 @@ export function useFreeFireOrder() {
       userId,
       nickname,
       paymentMethod,
+      codLocation,
     });
 
     window.open(`https://wa.me/${waNumber}?text=${message}`, "_blank");
@@ -66,6 +68,8 @@ export function useFreeFireOrder() {
     pulse,
     paymentMethod,
     setPaymentMethod,
+    codLocation,
+    setCodLocation,
     filteredProducts,
     categoryTabsRef,
     handleSelect,

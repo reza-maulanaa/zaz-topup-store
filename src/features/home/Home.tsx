@@ -34,7 +34,7 @@ export function Home() {
   return (
     <>
       <Header />
-      <HeroSectionOne onTopUpClick={handleTopUpClick} onContactClick={handleContactClick} onGameSelect={handleGameSelect} />
+      <HeroSectionOne onTopUpClick={handleTopUpClick} onContactClick={handleContactClick} />
       <div ref={gameSectionRef}>
         <Game activeGame={activeGame} onGameSelect={handleGameSelect} />
       </div>

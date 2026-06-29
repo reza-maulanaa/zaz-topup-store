@@ -21,6 +21,7 @@ export function useMobileLegendsOrder() {
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethodKey>(
     DEFAULT_PAYMENT_METHOD,
   );
+  const [codLocation, setCodLocation] = useState("");
   const [showHowTo, setShowHowTo] = useState(false);
   const [pulse, setPulse] = useState(false);
 
@@ -58,6 +59,7 @@ export function useMobileLegendsOrder() {
       serverId,
       nickname,
       paymentMethod,
+      codLocation,
     });
 
     window.open(
@@ -78,6 +80,8 @@ export function useMobileLegendsOrder() {
     setNickname,
     paymentMethod,
     setPaymentMethod,
+    codLocation,
+    setCodLocation,
     showHowTo,
     setShowHowTo,
     pulse,

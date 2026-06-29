@@ -7,6 +7,7 @@ import CategoryTabs from "./components/CategoryTabs";
 import { ProductGrid } from "./components/ProductGrid";
 import { PaymentMethods } from "./components/PaymentMethod";
 import { OrderPreview } from "./components/OrderPreview";
+import { CodLocationChat } from "@/components/ui/CodLocationChat";
 import { StickyOrderButton } from "./components/StickyOrderButton";
 import { categories } from "./data/categories";
 import { useMobileLegendsOrder } from "./hooks/useMobileLegendsOrder";
@@ -24,6 +25,8 @@ export default function MobileLegendsPage() {
     setNickname,
     paymentMethod,
     setPaymentMethod,
+    codLocation,
+    setCodLocation,
     showHowTo,
     setShowHowTo,
     pulse,
@@ -88,6 +91,10 @@ export default function MobileLegendsPage() {
 
         {/* Step 3: Pembayaran */}
         <PaymentMethods value={paymentMethod} onChange={setPaymentMethod} />
+
+        {paymentMethod === "COD" && (
+          <CodLocationChat value={codLocation} onChange={setCodLocation} />
+        )}
       </div>
 
       {/* Sticky Bottom Bar */}

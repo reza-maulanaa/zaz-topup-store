@@ -69,7 +69,7 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 bg-white/95 backdrop-blur-md transition-all duration-200 ${
+      className={`sticky top-0 z-50  backdrop-blur-md transition-all duration-200 ${
         scrolled
           ? "border-b border-blue-200 shadow-sm"
           : "border-b border-transparent"
@@ -141,7 +141,7 @@ export function Header() {
               </Link>
               <Link
                 href="/register"
-                className="bg-red-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700 hover:shadow-md"
+                className="border-red-500 px-5 py-2 text-sm font-semibold text-red-500 transition hover:bg-red-100 hover:shadow-md"
               >
                 Daftar Gratis
               </Link>

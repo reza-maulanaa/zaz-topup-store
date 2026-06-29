@@ -11,11 +11,15 @@ export function createWhatsAppOrderMessage(params: {
   serverId: string;
   nickname: string;
   paymentMethod: PaymentMethodKey;
+  codLocation?: string;
 }) {
-  const { selected, userId, serverId, nickname, paymentMethod } = params;
+  const { selected, userId, serverId, nickname, paymentMethod, codLocation } = params;
   const uid = userId || "Belum diisi";
   const sid = serverId || "-";
   const nick = nickname || "Belum diisi";
+  const locationLine = paymentMethod === "COD" && codLocation
+    ? `\nLokasi COD : ${codLocation}`
+    : "";
 
   return encodeURIComponent(
     `Halo Min Zaz! Order Mobile Legends:\n\n` +
@@ -23,7 +27,7 @@ export function createWhatsAppOrderMessage(params: {
       `User ID   : ${uid}\n` +
       `Server ID : ${sid}\n` +
       `Nickname  : ${nick}\n` +
-      `Bayar     : ${paymentMethod}\n` +
+      `Bayar     : ${paymentMethod}${locationLine}\n` +
       `Harga     : ${formatCurrency(selected.price)}\n\n` +
       `Mohon konfirmasi. Terima kasih!`,
   );

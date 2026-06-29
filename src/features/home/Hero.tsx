@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { FloatingGameCards } from "@/components/ui/floating-game-cards";
+import { CursorDrivenParticleTypography } from "@/components/ui/cursor-driven-particle-typography";
 
 const TRUST_ITEMS = [
   {
@@ -67,13 +67,11 @@ const TRUST_ITEMS = [
 type HeroSectionOneProps = {
   onTopUpClick: () => void;
   onContactClick: () => void;
-  onGameSelect?: (slug: "free-fire" | "mobile-legends") => void;
 };
 
 export default function HeroSectionOne({
   onTopUpClick,
   onContactClick,
-  onGameSelect,
 }: HeroSectionOneProps) {
   return (
     <section className="mx-auto max-w-7xl overflow-hidden px-4 pb-8 pt-10 md:px-8 md:pb-12 md:pt-16">
@@ -172,14 +170,23 @@ export default function HeroSectionOne({
           </motion.div>
         </div>
 
-        {/* Floating Game Cards */}
+        {/* Cursor Particle */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4, delay: 0.9 }}
           className="order-2 flex justify-center lg:justify-end"
         >
-          <FloatingGameCards onSelect={onGameSelect} />
+          <CursorDrivenParticleTypography
+            text="ZAZSTORE.ID"
+            fontSize={90}
+            particleSize={1.5}
+            particleDensity={6}
+            dispersionStrength={18}
+            returnSpeed={0.08}
+            color="#ef4444"
+            className="h-full min-h-0"
+          />
         </motion.div>
       </div>
     </section>
