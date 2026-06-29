@@ -165,7 +165,7 @@ export function Game({ activeGame, onGameSelect }: GameProps) {
             isActive={activeGame === game.key}
             onSelect={() => onGameSelect(game.key)}
             index={index}
-            interactive={game.key !== "mobile-legends"}
+            interactive={false}
           />
         ))}
       </div>
