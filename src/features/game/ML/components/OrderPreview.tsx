@@ -19,7 +19,7 @@ export function OrderPreview({
   return (
     <div
       className={[
-        "rounded-2xl border border-slate-200 bg-white shadow-sm transition-transform duration-150",
+        "border border-slate-200 bg-white shadow-sm transition-transform duration-150",
         pulse ? "scale-[1.015]" : "scale-100",
       ].join(" ")}
     >

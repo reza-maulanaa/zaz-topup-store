@@ -112,10 +112,10 @@ function LinkCard({
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="group flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-3 transition duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-sm"
+      className="group flex items-center gap-3 border border-slate-200 bg-white p-3 transition duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-sm"
     >
       <div
-        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ring-1 transition duration-200 ${iconBg}`}
+        className={`flex h-11 w-11 shrink-0 items-center justify-center ring-1 transition duration-200 ${iconBg}`}
       >
         {icon}
       </div>
@@ -148,7 +148,7 @@ export function Footer() {
           {/* Brand */}
           <section className="lg:col-span-1">
             <div className="flex items-center gap-3">
-              <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden border border-slate-200 bg-white shadow-sm">
                 <Image
                   src="/zaz.avif"
                   alt="ZazStore"
@@ -174,7 +174,7 @@ export function Footer() {
               href={`https://wa.me/${WA}`}
               target="_blank"
               rel="noreferrer"
-              className="mt-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100"
+              className="mt-5 inline-flex items-center gap-2 border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100"
             >
               <WAIcon size={16} />+{WA}
             </a>

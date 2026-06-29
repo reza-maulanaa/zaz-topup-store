@@ -27,7 +27,7 @@ export default function CategoryTabs({
             type="button"
             onClick={() => onChange(category.key)}
             className={[
-              "shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-150",
+              "shrink-0 border px-4 py-2 text-sm font-semibold transition-all duration-150",
               active
                 ? "border-violet-200 bg-violet-50 text-violet-700 shadow-sm"
                 : "border-slate-200 bg-white text-slate-500 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-700",

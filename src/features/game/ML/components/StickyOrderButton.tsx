@@ -15,7 +15,7 @@ export function StickyOrderButton({
       disabled={disabled}
       onClick={onClick}
       className={[
-        "flex w-full items-center justify-center gap-2.5 rounded-2xl px-5 py-4 text-sm font-bold shadow-sm transition-all duration-200",
+        "flex w-full items-center justify-center gap-2.5 px-5 py-4 text-sm font-bold shadow-sm transition-all duration-200",
         disabled
           ? "cursor-not-allowed bg-slate-100 text-slate-400"
           : "bg-slate-900 text-white hover:-translate-y-0.5 hover:bg-slate-700 hover:shadow-md",

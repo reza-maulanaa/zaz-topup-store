@@ -19,7 +19,7 @@ export default function HowToOrder({
   onToggle: () => void;
 }) {
   return (
-    <section className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-sm">
+    <section className="overflow-hidden border border-slate-200 bg-white shadow-sm">
       <button
         type="button"
         onClick={onToggle}
@@ -27,7 +27,7 @@ export default function HowToOrder({
         aria-expanded={open}
       >
         <span className="flex items-center gap-2 text-sm font-semibold text-slate-900 sm:text-base">
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-50 text-base">
+          <span className="flex h-7 w-7 items-center justify-center bg-amber-50 text-base">
             📋
           </span>
           Cara Order
@@ -40,7 +40,7 @@ export default function HowToOrder({
           <ol className="space-y-3">
             {STEPS.map((step, index) => (
               <li key={step} className="flex items-start gap-3 text-sm">
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-violet-50 text-xs font-bold text-violet-600">
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center bg-violet-50 text-xs font-bold text-violet-600">
                   {index + 1}
                 </span>
                 <span className="text-slate-600 leading-relaxed">{step}</span>

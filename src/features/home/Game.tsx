@@ -21,7 +21,7 @@ const games: {
   },
   {
     name: "Mobile Legends",
-    image: "/ml.avif",
+    image: "/ml.webp",
     key: "mobile-legends",
     desc: "Diamond & Pass",
     accent: "from-sky-50 to-violet-50 border-violet-200",
@@ -42,8 +42,8 @@ export function Game({ activeGame, onGameSelect }: GameProps) {
         viewport={{ once: true }}
         transition={{ duration: 0.4 }}
       >
-        <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-500">
-          <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
+        <div className="mb-3 inline-flex items-center gap-2 border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-500">
+          <span className="h-1.5 w-1.5 bg-slate-400" />
           Pilih Game
         </div>
         <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
@@ -68,7 +68,7 @@ export function Game({ activeGame, onGameSelect }: GameProps) {
               onClick={() => onGameSelect(game.key)}
             >
               <div
-                className={`relative overflow-hidden rounded-2xl border-2 bg-white transition-all duration-200 ${
+                className={`relative overflow-hidden border-2 bg-white transition-all duration-200 ${
                   isActive
                     ? `scale-105 bg-gradient-to-br shadow-lg ${game.accent}`
                     : "border-slate-200 hover:scale-[1.03] hover:border-slate-300 hover:shadow-md"
@@ -84,7 +84,7 @@ export function Game({ activeGame, onGameSelect }: GameProps) {
                 </div>
 
                 {isActive && (
-                  <div className="absolute bottom-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-md">
+                  <div className="absolute bottom-2 right-2 flex h-6 w-6 items-center justify-center bg-white shadow-md">
                     <svg
                       width="11"
                       height="11"
@@ -109,7 +109,7 @@ export function Game({ activeGame, onGameSelect }: GameProps) {
 
               {isActive && (
                 <div className="mt-1.5 flex justify-center">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-violet-100 px-2.5 py-0.5 text-[10px] font-bold text-violet-700">
+                  <span className="inline-flex items-center gap-1 bg-violet-100 px-2.5 py-0.5 text-[10px] font-bold text-violet-700">
                     ✓ Dipilih
                   </span>
                 </div>

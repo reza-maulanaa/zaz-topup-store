@@ -19,7 +19,7 @@ export function ProductCard({
       type="button"
       onClick={() => onSelect(item)}
       className={[
-        "relative w-full rounded-2xl border p-4 text-left transition-all duration-200",
+        "relative w-full border p-4 text-left transition-all duration-200",
         selected
           ? "border-violet-400 bg-violet-50 shadow-md shadow-violet-100 ring-1 ring-violet-300"
           : "border-slate-200 bg-white hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md",
@@ -27,7 +27,7 @@ export function ProductCard({
     >
       {/* Discount badge */}
       {item.discount ? (
-        <span className="absolute right-0 top-0 rounded-bl-xl rounded-tr-2xl bg-red-500 px-2.5 py-1 text-[10px] font-bold tracking-wide text-white">
+        <span className="absolute right-0 top-0 bg-red-500 px-2.5 py-1 text-[10px] font-bold tracking-wide text-white">
           -{item.discount}%
         </span>
       ) : null}
@@ -39,7 +39,7 @@ export function ProductCard({
 
       {/* Selected check */}
       {selected ? (
-        <span className="absolute right-2.5 top-2.5 flex h-5 w-5 items-center justify-center rounded-full bg-violet-600 text-white shadow-sm">
+        <span className="absolute right-2.5 top-2.5 flex h-5 w-5 items-center justify-center bg-violet-600 text-white shadow-sm">
           <CheckIcon />
         </span>
       ) : null}

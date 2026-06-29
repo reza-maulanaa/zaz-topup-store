@@ -82,7 +82,7 @@ export function Header() {
           className="group flex items-center gap-3"
           onClick={() => setMenuOpen(false)}
         >
-          <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl shadow-sm ring-1 ring-slate-200 sm:h-11 sm:w-11 lg:h-12 lg:w-12">
+          <div className="relative h-10 w-10 shrink-0 overflow-hidden shadow-sm ring-1 ring-slate-200 sm:h-11 sm:w-11 lg:h-12 lg:w-12">
             <Image
               src="/zaz.avif"
               alt="ZazStore"
@@ -107,7 +107,7 @@ export function Header() {
               {user.role === "admin" && (
                 <Link
                   href="/admin"
-                  className={`rounded-full px-4 py-1.5 text-sm font-semibold transition ${
+                  className={`px-4 py-1.5 text-sm font-semibold transition ${
                     pathname.startsWith("/admin")
                       ? "bg-purple-100 text-purple-700"
                       : "bg-purple-50 text-purple-600 hover:bg-purple-100"
@@ -116,8 +116,8 @@ export function Header() {
                   Admin Panel
                 </Link>
               )}
-              <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 py-1 pl-2 pr-1.5">
-                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-800 text-[11px] font-bold text-white">
+              <div className="flex items-center gap-2 border border-slate-200 bg-slate-50 py-1 pl-2 pr-1.5">
+                <div className="flex h-7 w-7 items-center justify-center bg-slate-800 text-[11px] font-bold text-white">
                   {initials}
                 </div>
                 <span className="max-w-[110px] truncate text-sm font-medium text-slate-700">
@@ -125,7 +125,7 @@ export function Header() {
                 </span>
                 <button
                   onClick={handleLogout}
-                  className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-500 shadow-sm ring-1 ring-slate-200 transition hover:bg-red-50 hover:text-red-600 hover:ring-red-200"
+                  className="bg-white px-3 py-1 text-xs font-semibold text-slate-500 shadow-sm ring-1 ring-slate-200 transition hover:bg-red-50 hover:text-red-600 hover:ring-red-200"
                 >
                   Keluar
                 </button>
@@ -135,13 +135,13 @@ export function Header() {
             <>
               <Link
                 href="/login"
-                className="rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+                className="px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
               >
                 Masuk
               </Link>
               <Link
                 href="/register"
-                className="rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-700 hover:shadow-md"
+                className="bg-slate-900 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-700 hover:shadow-md"
               >
                 Daftar Gratis
               </Link>
@@ -153,7 +153,7 @@ export function Header() {
         <button
           onClick={() => setMenuOpen((v) => !v)}
           aria-label={menuOpen ? "Tutup menu" : "Buka menu"}
-          className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 transition hover:bg-slate-50 sm:hidden"
+          className="flex h-9 w-9 items-center justify-center border border-slate-200 bg-white text-slate-600 transition hover:bg-slate-50 sm:hidden"
         >
           <HamburgerIcon open={menuOpen} />
         </button>
@@ -164,8 +164,8 @@ export function Header() {
         <div className="border-t border-slate-100 bg-white px-4 pb-4 pt-3 sm:hidden">
           {user ? (
             <div className="space-y-2">
-              <div className="flex items-center gap-3 rounded-xl bg-slate-50 px-4 py-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-800 text-sm font-bold text-white">
+              <div className="flex items-center gap-3 bg-slate-50 px-4 py-3">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center bg-slate-800 text-sm font-bold text-white">
                   {initials}
                 </div>
                 <div className="min-w-0">
@@ -180,7 +180,7 @@ export function Header() {
               {user.role === "admin" && (
                 <Link
                   href="/admin"
-                  className="flex w-full items-center gap-2 rounded-xl bg-purple-50 px-4 py-3 text-sm font-semibold text-purple-700"
+                  className="flex w-full items-center gap-2 bg-purple-50 px-4 py-3 text-sm font-semibold text-purple-700"
                 >
                   <svg
                     width="15"
@@ -203,7 +203,7 @@ export function Header() {
               )}
               <button
                 onClick={handleLogout}
-                className="flex w-full items-center gap-2 rounded-xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-600 transition hover:bg-red-100"
+                className="flex w-full items-center gap-2 bg-red-50 px-4 py-3 text-sm font-semibold text-red-600 transition hover:bg-red-100"
               >
                 <svg
                   width="15"
@@ -227,13 +227,13 @@ export function Header() {
             <div className="space-y-2">
               <Link
                 href="/login"
-                className="flex w-full items-center justify-center rounded-xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                className="flex w-full items-center justify-center border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
               >
                 Masuk
               </Link>
               <Link
                 href="/register"
-                className="flex w-full items-center justify-center rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
+                className="flex w-full items-center justify-center bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
               >
                 Daftar Gratis
               </Link>

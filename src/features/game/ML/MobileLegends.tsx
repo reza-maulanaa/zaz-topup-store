@@ -54,9 +54,9 @@ export default function MobileLegendsPage() {
         />
 
         {/* Step 2: Pilih Item */}
-        <section className="rounded-[24px] border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+        <section className="border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
           <div className="mb-4 flex items-center gap-3">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-violet-50 text-sm font-bold text-violet-600">
+            <span className="flex h-8 w-8 items-center justify-center bg-violet-50 text-sm font-bold text-violet-600">
               2
             </span>
             <div>
@@ -71,7 +71,7 @@ export default function MobileLegendsPage() {
             tabsRef={categoryTabsRef}
           />
 
-          <div className="mt-3 rounded-xl bg-slate-50 px-4 py-2.5">
+          <div className="mt-3 bg-slate-50 px-4 py-2.5">
             <span className="text-xs font-bold uppercase tracking-wide text-slate-500">
               {currentCategoryLabel}
             </span>
