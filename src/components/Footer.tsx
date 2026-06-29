@@ -112,14 +112,14 @@ function LinkCard({
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="group flex items-center gap-3 border border-slate-200 bg-white p-3 transition duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-sm"
+      className="group flex items-center gap-3 border border-blue-100 bg-white p-3 transition duration-200 hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-sm"
     >
       <div
         className={`flex h-11 w-11 shrink-0 items-center justify-center ring-1 transition duration-200 ${iconBg}`}
       >
         {icon}
       </div>
-      <span className="text-sm font-semibold text-slate-700 transition group-hover:text-slate-900">
+      <span className="text-sm font-semibold text-slate-700 transition group-hover:text-blue-700">
         {label}
       </span>
       <svg
@@ -131,7 +131,7 @@ function LinkCard({
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="ml-auto shrink-0 text-slate-300 transition group-hover:text-slate-500"
+        className="ml-auto shrink-0 text-blue-300 transition group-hover:text-blue-500"
         aria-hidden="true"
       >
         <path d="M5 12h14M12 5l7 7-7 7" />
@@ -142,13 +142,13 @@ function LinkCard({
 
 export function Footer() {
   return (
-    <footer id="footer" className="border-t border-slate-200 bg-slate-50">
+    <footer id="footer" className="border-t border-blue-200 bg-blue-50">
       <div className="mx-auto max-w-7xl px-4 py-12 md:px-8">
         <div className="grid gap-10 lg:grid-cols-3">
           {/* Brand */}
           <section className="lg:col-span-1">
             <div className="flex items-center gap-3">
-              <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden border border-slate-200 bg-white shadow-sm">
+              <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden border border-blue-200 bg-white shadow-sm">
                 <Image
                   src="/zaz.avif"
                   alt="ZazStore"
@@ -182,7 +182,7 @@ export function Footer() {
 
           {/* Contact */}
           <section>
-            <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-slate-400">
+            <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-blue-600">
               Kontak
             </h3>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
@@ -194,7 +194,7 @@ export function Footer() {
 
           {/* Social */}
           <section>
-            <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-slate-400">
+            <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-blue-600">
               Ikuti Kami
             </h3>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
@@ -205,7 +205,7 @@ export function Footer() {
           </section>
         </div>
 
-        <div className="mt-10 flex flex-col items-start justify-between gap-2 border-t border-slate-200 pt-6 sm:flex-row sm:items-center">
+        <div className="mt-10 flex flex-col items-start justify-between gap-2 border-t border-blue-200 pt-6 sm:flex-row sm:items-center">
           <p className="text-sm text-slate-400">
             © 2025 ZazStore.ID · Semua transaksi diproses manual via WhatsApp
           </p>

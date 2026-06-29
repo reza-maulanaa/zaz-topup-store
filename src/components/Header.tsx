@@ -71,7 +71,7 @@ export function Header() {
     <header
       className={`sticky top-0 z-50 bg-white/95 backdrop-blur-md transition-all duration-200 ${
         scrolled
-          ? "border-b border-slate-200 shadow-sm"
+          ? "border-b border-blue-200 shadow-sm"
           : "border-b border-transparent"
       }`}
     >
@@ -82,7 +82,7 @@ export function Header() {
           className="group flex items-center gap-3"
           onClick={() => setMenuOpen(false)}
         >
-          <div className="relative h-10 w-10 shrink-0 overflow-hidden shadow-sm ring-1 ring-slate-200 sm:h-11 sm:w-11 lg:h-12 lg:w-12">
+          <div className="relative h-10 w-10 shrink-0 overflow-hidden sm:h-11 sm:w-11 lg:h-12 lg:w-12">
             <Image
               src="/zaz.avif"
               alt="ZazStore"
@@ -94,7 +94,7 @@ export function Header() {
             <p className="text-base font-bold tracking-tight text-slate-900 sm:text-lg">
               ZazStoreId
             </p>
-            <p className="text-[11px] text-slate-400 sm:text-xs">
+            <p className="text-[11px] text-blue-500 sm:text-xs">
               Top Up Game Instan
             </p>
           </div>
@@ -109,15 +109,15 @@ export function Header() {
                   href="/admin"
                   className={`px-4 py-1.5 text-sm font-semibold transition ${
                     pathname.startsWith("/admin")
-                      ? "bg-purple-100 text-purple-700"
-                      : "bg-purple-50 text-purple-600 hover:bg-purple-100"
+                      ? "bg-blue-100 text-blue-700"
+                      : "bg-blue-50 text-blue-600 hover:bg-blue-100"
                   }`}
                 >
                   Admin Panel
                 </Link>
               )}
-              <div className="flex items-center gap-2 border border-slate-200 bg-slate-50 py-1 pl-2 pr-1.5">
-                <div className="flex h-7 w-7 items-center justify-center bg-slate-800 text-[11px] font-bold text-white">
+              <div className="flex items-center gap-2 border border-blue-200 bg-blue-50 py-1 pl-2 pr-1.5">
+                <div className="flex h-7 w-7 items-center justify-center bg-blue-600 text-[11px] font-bold text-white">
                   {initials}
                 </div>
                 <span className="max-w-[110px] truncate text-sm font-medium text-slate-700">
@@ -135,13 +135,13 @@ export function Header() {
             <>
               <Link
                 href="/login"
-                className="px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+                className="px-4 py-2 text-sm font-medium text-blue-600 transition hover:bg-blue-50 hover:text-blue-700"
               >
                 Masuk
               </Link>
               <Link
                 href="/register"
-                className="bg-slate-900 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-700 hover:shadow-md"
+                className="bg-red-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700 hover:shadow-md"
               >
                 Daftar Gratis
               </Link>
@@ -153,7 +153,7 @@ export function Header() {
         <button
           onClick={() => setMenuOpen((v) => !v)}
           aria-label={menuOpen ? "Tutup menu" : "Buka menu"}
-          className="flex h-9 w-9 items-center justify-center border border-slate-200 bg-white text-slate-600 transition hover:bg-slate-50 sm:hidden"
+          className="flex h-9 w-9 items-center justify-center border border-blue-200 bg-white text-blue-600 transition hover:bg-blue-50 sm:hidden"
         >
           <HamburgerIcon open={menuOpen} />
         </button>
@@ -161,18 +161,18 @@ export function Header() {
 
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
-        <div className="border-t border-slate-100 bg-white px-4 pb-4 pt-3 sm:hidden">
+        <div className="border-t border-blue-100 bg-white px-4 pb-4 pt-3 sm:hidden">
           {user ? (
             <div className="space-y-2">
-              <div className="flex items-center gap-3 bg-slate-50 px-4 py-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center bg-slate-800 text-sm font-bold text-white">
+              <div className="flex items-center gap-3 bg-blue-50 px-4 py-3">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center bg-blue-600 text-sm font-bold text-white">
                   {initials}
                 </div>
                 <div className="min-w-0">
                   <p className="truncate text-sm font-semibold text-slate-900">
                     {user.name}
                   </p>
-                  <p className="text-xs text-slate-400 capitalize">
+                  <p className="text-xs text-blue-500 capitalize">
                     {user.role}
                   </p>
                 </div>
@@ -180,7 +180,7 @@ export function Header() {
               {user.role === "admin" && (
                 <Link
                   href="/admin"
-                  className="flex w-full items-center gap-2 bg-purple-50 px-4 py-3 text-sm font-semibold text-purple-700"
+                  className="flex w-full items-center gap-2 bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-700"
                 >
                   <svg
                     width="15"
@@ -227,13 +227,13 @@ export function Header() {
             <div className="space-y-2">
               <Link
                 href="/login"
-                className="flex w-full items-center justify-center border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                className="flex w-full items-center justify-center border border-blue-200 px-4 py-3 text-sm font-semibold text-blue-700 transition hover:bg-blue-50"
               >
                 Masuk
               </Link>
               <Link
                 href="/register"
-                className="flex w-full items-center justify-center bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
+                className="flex w-full items-center justify-center bg-red-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-red-700"
               >
                 Daftar Gratis
               </Link>

@@ -78,7 +78,7 @@ export function FloatingGameCards({
                   <button
                     onPointerDown={(e) => e.stopPropagation()}
                     onClick={() => onSelect?.(card.slug)}
-                    className="bg-white px-2 py-0.5 text-[10px] font-semibold text-zinc-900 hover:bg-zinc-100 transition-colors"
+                    className="bg-red-600 px-2 py-0.5 text-[10px] font-semibold text-white hover:bg-red-700 transition-colors"
                     style={{ cursor: "pointer" }}
                   >
                     Beli
@@ -91,7 +91,7 @@ export function FloatingGameCards({
       ))}
 
       {/* Decorative blur blob */}
-      <div className="absolute left-16 top-16 h-40 w-40 rounded-full bg-red-100 opacity-40 blur-3xl" />
+      <div className="absolute left-16 top-16 h-40 w-40 rounded-full bg-yellow-200 opacity-60 blur-3xl" />
     </div>
   );
 }
