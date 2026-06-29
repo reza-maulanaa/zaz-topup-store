@@ -28,9 +28,8 @@ export function FloatingGameCards({
   onSelect?: (slug: "free-fire" | "mobile-legends") => void;
 }) {
   return (
-    <div className="relative h-[320px] w-full">
+    <div className="relative h-[320px] w-full lg:h-[420px]">
       {cards.map((card, i) => (
-        /* Float wrapper — hanya animasi naik-turun */
         <motion.div
           key={card.game}
           animate={{ y: [0, -10, 0] }}
@@ -40,11 +39,15 @@ export function FloatingGameCards({
             ease: "easeInOut",
             delay: card.delay,
           }}
-          className={`absolute ${i === 0 ? "left-8 top-4" : "left-32 top-28"}`}
+          className={`absolute ${
+            i === 0
+              ? "left-8 top-4 lg:left-[8%] lg:top-8"
+              : "left-32 top-28 lg:left-[42%] lg:top-36"
+          }`}
         >
-          <div className="w-48 overflow-hidden border border-zinc-200 shadow-md">
+          <div className="w-48 overflow-hidden border border-zinc-200 shadow-md lg:w-64">
             {/* Full image */}
-            <div className="relative h-56 w-full bg-zinc-100">
+            <div className="relative h-56 w-full bg-zinc-100 lg:h-72">
               <Image
                 src={card.image}
                 alt={card.game}
@@ -78,7 +81,7 @@ export function FloatingGameCards({
       ))}
 
       {/* Decorative blur blob */}
-      <div className="absolute left-16 top-16 h-40 w-40 rounded-full bg-yellow-200 opacity-60 blur-3xl" />
+      <div className="absolute left-16 top-16 h-40 w-40 rounded-full bg-yellow-200 opacity-60 blur-3xl lg:left-[25%] lg:h-64 lg:w-64" />
     </div>
   );
 }
