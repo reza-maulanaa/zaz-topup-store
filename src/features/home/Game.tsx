@@ -29,9 +29,10 @@ type GameCardProps = {
   isActive: boolean;
   onSelect: () => void;
   index: number;
+  interactive?: boolean;
 };
 
-function GameCard({ game, isActive, onSelect, index }: GameCardProps) {
+function GameCard({ game, isActive, onSelect, index, interactive = true }: GameCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
@@ -47,23 +48,25 @@ function GameCard({ game, isActive, onSelect, index }: GameCardProps) {
   }, [isActive]);
 
   const handleMouseEnter = () => {
-    if (isActive) return;
+    if (!interactive || isActive) return;
     gsap.to(cardRef.current, { y: -10, scale: 1.05, duration: 0.25, ease: "power2.out" });
     gsap.to(imgRef.current, { scale: 1.1, duration: 0.35, ease: "power2.out" });
   };
 
   const handleMouseLeave = () => {
-    if (isActive) return;
+    if (!interactive || isActive) return;
     gsap.to(cardRef.current, { y: 0, scale: 1, duration: 0.25, ease: "power2.out" });
     gsap.to(imgRef.current, { scale: 1, duration: 0.35, ease: "power2.out" });
   };
 
   const handleClick = () => {
-    gsap
-      .timeline()
-      .to(cardRef.current, { scale: 0.92, duration: 0.1, ease: "power2.in" })
-      .to(cardRef.current, { scale: 1.07, duration: 0.22, ease: "back.out(2.5)" })
-      .to(cardRef.current, { scale: 1, duration: 0.15, ease: "power2.out" });
+    if (interactive) {
+      gsap
+        .timeline()
+        .to(cardRef.current, { scale: 0.92, duration: 0.1, ease: "power2.in" })
+        .to(cardRef.current, { scale: 1.07, duration: 0.22, ease: "back.out(2.5)" })
+        .to(cardRef.current, { scale: 1, duration: 0.15, ease: "power2.out" });
+    }
     onSelect();
   };
 
@@ -162,6 +165,7 @@ export function Game({ activeGame, onGameSelect }: GameProps) {
             isActive={activeGame === game.key}
             onSelect={() => onGameSelect(game.key)}
             index={index}
+            interactive={game.key !== "mobile-legends"}
           />
         ))}
       </div>
