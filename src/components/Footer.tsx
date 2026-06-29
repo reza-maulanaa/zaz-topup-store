@@ -203,7 +203,6 @@ export function Footer() {
           <p className="text-sm text-slate-400">
             © 2025 ZazStore.ID · Semua transaksi diproses manual via WhatsApp
           </p>
-          <p className="text-xs text-slate-300">Made with ♥ in Indonesia</p>
         </div>
       </div>
     </footer>
