@@ -11,6 +11,7 @@ export function useFreeFireOrder() {
   const [showHowTo, setShowHowTo] = useState(false);
   const [pulse, setPulse] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethodKey>(defaultPaymentMethod);
+  const [codLocation, setCodLocation] = useState("");
   const [nominals, setNominals] = useState<Nominal[]>([]);
 
   const categoryTabsRef = useRef<HTMLDivElement>(null);
@@ -45,7 +46,7 @@ export function useFreeFireOrder() {
   const handleOrder = () => {
     if (!selected) return;
     const waNumber = getWhatsappNumber();
-    const message = createWhatsAppOrderMessage({ selected, userId, nickname, paymentMethod });
+    const message = createWhatsAppOrderMessage({ selected, userId, nickname, paymentMethod, codLocation });
     window.open(`https://wa.me/${waNumber}?text=${message}`, "_blank");
   };
 
@@ -57,6 +58,7 @@ export function useFreeFireOrder() {
     showHowTo, setShowHowTo,
     pulse,
     paymentMethod, setPaymentMethod,
+    codLocation, setCodLocation,
     filteredProducts,
     categoryTabsRef,
     handleSelect,

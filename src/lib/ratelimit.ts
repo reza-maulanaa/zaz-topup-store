@@ -29,6 +29,12 @@ export async function checkRateLimit(
   identifier: string,
 ): Promise<boolean> {
   if (!limiter) return true;
-  const { success } = await limiter.limit(identifier);
-  return success;
+  try {
+    const { success } = await limiter.limit(identifier);
+    return success;
+  } catch (err) {
+    // ponytail: Redis down / bad token → fail open so auth never 500s.
+    console.error("rate limit check failed, allowing request:", err);
+    return true;
+  }
 }

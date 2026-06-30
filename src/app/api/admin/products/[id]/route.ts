@@ -3,7 +3,6 @@ import { getAuthUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { products } from "@/lib/schema";
 import { eq } from "drizzle-orm";
-<<<<<<< HEAD
 import { z } from "zod";
 
 const updateProductSchema = z.object({
@@ -20,9 +19,6 @@ const updateProductSchema = z.object({
 });
 
 // PATCH — edit produk
-=======
-
->>>>>>> second
 export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
@@ -38,7 +34,6 @@ export async function PATCH(
 
     const { id } = await params;
     const body = await req.json();
-<<<<<<< HEAD
     const parsed = updateProductSchema.safeParse(body);
 
     if (!parsed.success) {
@@ -59,23 +54,12 @@ export async function PATCH(
       .limit(1);
 
     if (!existing[0]) {
-=======
-
-    const [product] = await db
-      .update(products)
-      .set({ ...body, updatedAt: new Date() })
-      .where(eq(products.id, id))
-      .returning();
-
-    if (!product) {
->>>>>>> second
       return NextResponse.json(
         { success: false, message: "Produk tidak ditemukan" },
         { status: 404 },
       );
     }
 
-<<<<<<< HEAD
     const [updated] = await db
       .update(products)
       .set({ ...parsed.data, updatedAt: new Date() })
@@ -83,9 +67,6 @@ export async function PATCH(
       .returning();
 
     return NextResponse.json({ success: true, product: updated });
-=======
-    return NextResponse.json({ success: true, product });
->>>>>>> second
   } catch {
     return NextResponse.json(
       { success: false, message: "Terjadi kesalahan server" },
@@ -94,11 +75,7 @@ export async function PATCH(
   }
 }
 
-<<<<<<< HEAD
 // DELETE — toggle aktif/nonaktif (soft delete)
-=======
-// ponytail: DELETE toggles isActive instead of deleting — matches adminApi.toggleProduct
->>>>>>> second
 export async function DELETE(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
@@ -115,11 +92,7 @@ export async function DELETE(
     const { id } = await params;
 
     const existing = await db
-<<<<<<< HEAD
       .select({ id: products.id, isActive: products.isActive })
-=======
-      .select({ isActive: products.isActive })
->>>>>>> second
       .from(products)
       .where(eq(products.id, id))
       .limit(1);
@@ -131,17 +104,12 @@ export async function DELETE(
       );
     }
 
-<<<<<<< HEAD
     const [updated] = await db
-=======
-    const [product] = await db
->>>>>>> second
       .update(products)
       .set({ isActive: !existing[0].isActive, updatedAt: new Date() })
       .where(eq(products.id, id))
       .returning();
 
-<<<<<<< HEAD
     return NextResponse.json({
       success: true,
       product: updated,
@@ -149,10 +117,6 @@ export async function DELETE(
         ? "Produk diaktifkan kembali"
         : "Produk dinonaktifkan",
     });
-=======
-    const message = product.isActive ? "Produk diaktifkan" : "Produk dinonaktifkan";
-    return NextResponse.json({ success: true, product, message });
->>>>>>> second
   } catch {
     return NextResponse.json(
       { success: false, message: "Terjadi kesalahan server" },

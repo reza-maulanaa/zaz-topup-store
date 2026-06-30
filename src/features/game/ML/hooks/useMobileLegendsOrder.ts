@@ -10,6 +10,7 @@ export function useMobileLegendsOrder() {
   const [serverId, setServerId] = useState("");
   const [nickname, setNickname] = useState("");
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethodKey>(DEFAULT_PAYMENT_METHOD);
+  const [codLocation, setCodLocation] = useState("");
   const [showHowTo, setShowHowTo] = useState(false);
   const [pulse, setPulse] = useState(false);
   const [nominalData, setNominalData] = useState<Nominal[]>([]);
@@ -45,7 +46,7 @@ export function useMobileLegendsOrder() {
 
   const handleOrder = () => {
     if (!selected) return;
-    const message = createWhatsAppOrderMessage({ selected, userId, serverId, nickname, paymentMethod });
+    const message = createWhatsAppOrderMessage({ selected, userId, serverId, nickname, paymentMethod, codLocation });
     window.open(`https://wa.me/${getWhatsappNumber()}?text=${message}`, "_blank");
   };
 
@@ -56,6 +57,7 @@ export function useMobileLegendsOrder() {
     serverId, setServerId,
     nickname, setNickname,
     paymentMethod, setPaymentMethod,
+    codLocation, setCodLocation,
     showHowTo, setShowHowTo,
     pulse,
     filteredProducts,
