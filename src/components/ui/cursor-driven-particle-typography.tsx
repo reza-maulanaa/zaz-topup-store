@@ -22,6 +22,8 @@ export interface CursorDrivenParticleTypographyProps {
     returnSpeed?: number;
     /** Custom color for particles. Overrides inherited text color if set. */
     color?: string;
+    /** Font weight (e.g. "400", "700"). Defaults to "bold". */
+    fontWeight?: string;
 }
 
 class Particle {
@@ -117,6 +119,7 @@ export function CursorDrivenParticleTypography({
     dispersionStrength = 15,
     returnSpeed = 0.08,
     color,
+    fontWeight = "bold",
 }: CursorDrivenParticleTypographyProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -161,7 +164,7 @@ export function CursorDrivenParticleTypography({
             ctx.fillStyle = textColor;
             // Responsive font size based on container width if text is large
             const effectiveFontSize = Math.min(fontSize, containerWidth * 0.15);
-            ctx.font = `bold ${effectiveFontSize}px ${fontFamily}`;
+            ctx.font = `${fontWeight} ${effectiveFontSize}px ${fontFamily}`;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
 
@@ -268,7 +271,7 @@ export function CursorDrivenParticleTypography({
             canvas.removeEventListener("mouseleave", handleMouseLeave);
             cancelAnimationFrame(animationFrameId);
         };
-    }, [text, fontSize, fontFamily, particleSize, particleDensity, dispersionStrength, returnSpeed, color]);
+    }, [text, fontSize, fontFamily, particleSize, particleDensity, dispersionStrength, returnSpeed, color, fontWeight]);
 
     return (
         <div

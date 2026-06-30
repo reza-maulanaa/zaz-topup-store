@@ -2,23 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { products } from "@/lib/schema";
-import { desc } from "drizzle-orm";
-import { z } from "zod";
+import { asc } from "drizzle-orm";
 
-const createProductSchema = z.object({
-  game: z.enum(["mobile_legends", "free_fire"]),
-  category: z.string().min(1, "Kategori wajib diisi"),
-  label: z.string().min(1, "Label wajib diisi").max(100),
-  diamonds: z.number().int().positive().optional(),
-  bonus: z.string().optional(),
-  price: z.number().int().positive("Harga harus lebih dari 0"),
-  originalPrice: z.number().int().positive().optional(),
-  discount: z.number().int().min(0).max(100).optional(),
-  popular: z.boolean().optional(),
-  sortOrder: z.number().int().optional(),
-});
-
-// GET — list semua produk (termasuk yang nonaktif, biar admin bisa toggle balik)
 export async function GET() {
   try {
     const user = await getAuthUser();
@@ -32,7 +17,7 @@ export async function GET() {
     const allProducts = await db
       .select()
       .from(products)
-      .orderBy(desc(products.createdAt));
+      .orderBy(asc(products.sortOrder), asc(products.createdAt));
 
     return NextResponse.json({ success: true, products: allProducts });
   } catch {
@@ -43,7 +28,6 @@ export async function GET() {
   }
 }
 
-// POST — tambah produk baru
 export async function POST(req: NextRequest) {
   try {
     const user = await getAuthUser();
@@ -55,28 +39,21 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json();
-    const parsed = createProductSchema.safeParse(body);
+    const { game, category, label, diamonds, bonus, price, originalPrice, discount, popular } = body;
 
-    if (!parsed.success) {
+    if (!game || !category || !label || !price) {
       return NextResponse.json(
-        {
-          success: false,
-          message: "Data tidak valid",
-          errors: parsed.error.flatten(),
-        },
+        { success: false, message: "Field wajib tidak lengkap" },
         { status: 400 },
       );
     }
 
-    const [newProduct] = await db
+    const [product] = await db
       .insert(products)
-      .values(parsed.data)
+      .values({ game, category, label, diamonds, bonus, price, originalPrice, discount, popular: popular ?? false, isActive: true })
       .returning();
 
-    return NextResponse.json(
-      { success: true, product: newProduct },
-      { status: 201 },
-    );
+    return NextResponse.json({ success: true, product }, { status: 201 });
   } catch {
     return NextResponse.json(
       { success: false, message: "Terjadi kesalahan server" },
