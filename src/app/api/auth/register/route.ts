@@ -3,17 +3,23 @@ import bcrypt from "bcryptjs";
 import { db } from "@/lib/db";
 import { users } from "@/lib/schema";
 import { eq } from "drizzle-orm";
+import { authLimiter, checkRateLimit, getClientIp } from "@/lib/ratelimit";
+import { registerSchema, parseBody } from "@/lib/validation";
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, password } = await req.json();
-
-    if (!name || !email || !password) {
+    if (!(await checkRateLimit(authLimiter, getClientIp(req)))) {
       return NextResponse.json(
-        { success: false, message: "Semua field wajib diisi" },
-        { status: 400 }
+        { success: false, message: "Terlalu banyak percobaan. Coba lagi sebentar." },
+        { status: 429 }
       );
     }
+
+    const parsed = parseBody(registerSchema, await req.json());
+    if (!parsed.ok) {
+      return NextResponse.json({ success: false, message: parsed.error }, { status: 400 });
+    }
+    const { name, email, password } = parsed.data;
 
     const existing = await db.select({ id: users.id })
       .from(users)

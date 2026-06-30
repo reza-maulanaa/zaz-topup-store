@@ -4,17 +4,23 @@ import { db } from "@/lib/db";
 import { users } from "@/lib/schema";
 import { eq } from "drizzle-orm";
 import { generateToken, setAuthCookie } from "@/lib/auth";
+import { authLimiter, checkRateLimit, getClientIp } from "@/lib/ratelimit";
+import { loginSchema, parseBody } from "@/lib/validation";
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, password } = await req.json();
-
-    if (!email || !password) {
+    if (!(await checkRateLimit(authLimiter, getClientIp(req)))) {
       return NextResponse.json(
-        { success: false, message: "Email dan password wajib diisi" },
-        { status: 400 }
+        { success: false, message: "Terlalu banyak percobaan. Coba lagi sebentar." },
+        { status: 429 }
       );
     }
+
+    const parsed = parseBody(loginSchema, await req.json());
+    if (!parsed.ok) {
+      return NextResponse.json({ success: false, message: parsed.error }, { status: 400 });
+    }
+    const { email, password } = parsed.data;
 
     const result = await db
       .select()

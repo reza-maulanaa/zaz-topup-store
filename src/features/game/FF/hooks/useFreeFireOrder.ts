@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { CategoryKey, Nominal, PaymentMethodKey } from "../types/freeFire.types";
-import { nominals } from "../data/nominals";
 import { defaultPaymentMethod } from "../data/paymentMethods";
 import { getWhatsappNumber, createWhatsAppOrderMessage } from "../utils/whatsapp";
 
@@ -11,26 +10,30 @@ export function useFreeFireOrder() {
   const [nickname, setNickname] = useState("");
   const [showHowTo, setShowHowTo] = useState(false);
   const [pulse, setPulse] = useState(false);
-  const [paymentMethod, setPaymentMethod] =
-    useState<PaymentMethodKey>(defaultPaymentMethod);
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethodKey>(defaultPaymentMethod);
+  const [nominals, setNominals] = useState<Nominal[]>([]);
 
   const categoryTabsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    fetch("/api/products?game=free_fire")
+      .then((r) => r.json())
+      .then((res) => {
+        if (res.products) setNominals(res.products as Nominal[]);
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     const el = categoryTabsRef.current?.querySelector(
       `[data-cat="${activeCategory}"]`,
     ) as HTMLElement | null;
-
-    el?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "center",
-    });
+    el?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
   }, [activeCategory]);
 
   const filteredProducts = useMemo(
     () => nominals.filter((item) => item.category === activeCategory),
-    [activeCategory],
+    [nominals, activeCategory],
   );
 
   const handleSelect = (nominal: Nominal) => {
@@ -41,31 +44,19 @@ export function useFreeFireOrder() {
 
   const handleOrder = () => {
     if (!selected) return;
-
     const waNumber = getWhatsappNumber();
-    const message = createWhatsAppOrderMessage({
-      selected,
-      userId,
-      nickname,
-      paymentMethod,
-    });
-
+    const message = createWhatsAppOrderMessage({ selected, userId, nickname, paymentMethod });
     window.open(`https://wa.me/${waNumber}?text=${message}`, "_blank");
   };
 
   return {
-    activeCategory,
-    setActiveCategory,
+    activeCategory, setActiveCategory,
     selected,
-    userId,
-    setUserId,
-    nickname,
-    setNickname,
-    showHowTo,
-    setShowHowTo,
+    userId, setUserId,
+    nickname, setNickname,
+    showHowTo, setShowHowTo,
     pulse,
-    paymentMethod,
-    setPaymentMethod,
+    paymentMethod, setPaymentMethod,
     filteredProducts,
     categoryTabsRef,
     handleSelect,

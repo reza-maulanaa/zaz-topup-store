@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyToken } from "@/lib/auth";
+import { verifyTokenEdge } from "@/lib/auth-edge";
 
 const PROTECTED_ROUTES = ["/admin"];
 const AUTH_ROUTES = ["/login", "/register"];
 
-export function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const token = request.cookies.get("token")?.value;
 
@@ -16,7 +16,7 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
     try {
-      const decoded = verifyToken(token);
+      const decoded = await verifyTokenEdge(token);
       if (decoded.role !== "admin") {
         return NextResponse.redirect(new URL("/", request.url));
       }
@@ -27,7 +27,7 @@ export function middleware(request: NextRequest) {
 
   if (isAuthRoute && token) {
     try {
-      verifyToken(token);
+      await verifyTokenEdge(token);
       return NextResponse.redirect(new URL("/", request.url));
     } catch {
       // token invalid, allow access to auth route

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { FloatingGameCards } from "@/components/ui/floating-game-cards";
+import { CursorDrivenParticleTypography } from "@/components/ui/cursor-driven-particle-typography";
 
 const TRUST_ITEMS = [
   {
@@ -170,14 +170,24 @@ export default function HeroSectionOne({
           </motion.div>
         </div>
 
-        {/* Floating Game Cards */}
+        {/* Particle Typography */}
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, delay: 0.9 }}
-          className="order-2 flex justify-center lg:justify-end"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="order-2 flex items-center justify-center lg:justify-end"
         >
-          <FloatingGameCards />
+          <CursorDrivenParticleTypography
+            text="zazstore.id"
+            fontSize={72}
+            particleSize={3}
+            particleDensity={4}
+            dispersionStrength={80}
+            returnSpeed={0.08}
+            fontWeight="300"
+            color="#f97316"
+            className="h-[280px] w-full max-w-[520px]"
+          />
         </motion.div>
       </div>
     </section>
