@@ -20,7 +20,7 @@
     "ios_saf >= 15.6"
   ],
   "dependencies": {
-    "@neondatabase/serverless": "^1.1.0",
+    "@`neondatabase`/serverless": "^1.1.0",
     "@tailwindcss/postcss": "^4.3.1",
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.38.0",
