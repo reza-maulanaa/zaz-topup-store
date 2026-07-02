@@ -17,6 +17,7 @@
 
 # production
 /build
+cookies.txt
 
 # misc
 .DS_Store
