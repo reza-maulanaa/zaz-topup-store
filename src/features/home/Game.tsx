@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useRef, useEffect } from "react";
-import { motion } from "motion/react";
 import gsap from "gsap";
 
 type ActiveGame = "free-fire" | "mobile-legends" | null;
@@ -71,12 +70,10 @@ function GameCard({ game, isActive, onSelect, index, interactive = true }: GameC
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.3, delay: index * 0.1 }}
-      className="cursor-pointer"
+    <div
+      className={`animate-in fade-in slide-in-from-bottom-5 fill-mode-both duration-300 cursor-pointer ${
+        index === 1 ? "delay-100" : ""
+      }`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
@@ -127,7 +124,7 @@ function GameCard({ game, isActive, onSelect, index, interactive = true }: GameC
           </span>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }
 
@@ -139,12 +136,7 @@ type GameProps = {
 export function Game({ activeGame, onGameSelect }: GameProps) {
   return (
     <section className="mx-auto max-w-7xl px-6 pb-10 pt-16 md:px-12 lg:px-16">
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.4 }}
-      >
+      <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both duration-400">
         <div className="mb-4 inline-flex items-center gap-2 border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600">
           <span className="h-1.5 w-1.5 bg-yellow-400" />
           Pilih Game
@@ -155,7 +147,7 @@ export function Game({ activeGame, onGameSelect }: GameProps) {
         <p className="mt-3 max-w-2xl text-base text-slate-500">
           Top up game favoritmu dengan proses instan dan harga terbaik.
         </p>
-      </motion.div>
+      </div>
 
       <div className="mt-10 flex flex-wrap justify-center gap-6 md:justify-start">
         {games.map((game, index) => (

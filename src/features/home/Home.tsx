@@ -1,12 +1,14 @@
 "use client";
 
 import { useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { Header } from "@/components/Header";
 import HeroSectionOne from "@/features/home/Hero";
 import { Game } from "@/features/home/Game";
-import FreeFire from "@/features/game/FF/FreeFire";
-import MobileLegends from "@/features/game/ML/MobileLegends";
 import { Footer } from "@/components/Footer";
+
+const FreeFire = dynamic(() => import("@/features/game/FF/FreeFire"));
+const MobileLegends = dynamic(() => import("@/features/game/ML/MobileLegends"));
 
 type ActiveGame = "free-fire" | "mobile-legends" | null;
 

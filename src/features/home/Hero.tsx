@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
 import { CursorDrivenParticleTypography } from "@/components/ui/cursor-driven-particle-typography";
 
 const TRUST_ITEMS = [
@@ -79,41 +78,29 @@ export default function HeroSectionOne({
         {/* Content */}
         <div className="order-1 flex flex-col items-center lg:items-start">
           {/* Status badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35 }}
-            className="mb-5 inline-flex items-center gap-2 border border-zinc-300 px-4 py-1.5 text-xs font-semibold text-zinc-500 tracking-wide"
+          <div
+            className="animate-in fade-in slide-in-from-top-2 fill-mode-both duration-300 mb-5 inline-flex items-center gap-2 border border-zinc-300 px-4 py-1.5 text-xs font-semibold text-zinc-500 tracking-wide"
           >
             <span className="h-1.5 w-1.5 animate-pulse bg-emerald-500" />
             Tersedia 24/7 · Proses Instan
-          </motion.div>
+          </div>
 
-          <motion.h1
-            initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
-            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-[650px] text-center text-4xl font-bold leading-tight tracking-tight text-slate-900 md:text-5xl lg:max-w-none lg:text-left"
+          <h1
+            className="animate-in fade-in blur-in-4 slide-in-from-bottom-2 fill-mode-both duration-500 max-w-[650px] text-center text-4xl font-bold leading-tight tracking-tight text-slate-900 md:text-5xl lg:max-w-none lg:text-left"
           >
             Top Up Game <span>Cepat</span>, Mudah & Tepercaya.
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.5 }}
-            className="mx-auto mt-5 max-w-xl text-center text-base leading-relaxed text-slate-500 lg:mx-0 lg:text-left"
+          <p
+            className="animate-in fade-in fill-mode-both duration-300 delay-500 mx-auto mt-5 max-w-xl text-center text-base leading-relaxed text-slate-500 lg:mx-0 lg:text-left"
           >
             Diamond Mobile Legends, Free Fire dan berbagai kebutuhan gaming
             lainnya dengan proses instan, aman, dan harga terbaik.
-          </motion.p>
+          </p>
 
           {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.7 }}
-            className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start"
+          <div
+            className="animate-in fade-in fill-mode-both duration-300 delay-700 mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start"
           >
             <button
               onClick={onTopUpClick}
@@ -142,14 +129,11 @@ export default function HeroSectionOne({
             >
               Kontak Kami
             </button>
-          </motion.div>
+          </div>
 
           {/* Trust badges */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.9 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
+          <div
+            className="animate-in fade-in fill-mode-both duration-400 delay-900 mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
           >
             {TRUST_ITEMS.map((item) => (
               <div
@@ -167,15 +151,12 @@ export default function HeroSectionOne({
                 </div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
 
         {/* Particle Typography */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="order-2 flex items-center justify-center lg:justify-end"
+        <div
+          className="animate-in fade-in fill-mode-both duration-600 delay-500 order-2 flex items-center justify-center lg:justify-end"
         >
           <CursorDrivenParticleTypography
             text="zazstore.id"
@@ -188,7 +169,7 @@ export default function HeroSectionOne({
             color="#f97316"
             className="h-[280px] w-full max-w-[520px]"
           />
-        </motion.div>
+        </div>
       </div>
     </section>
   );

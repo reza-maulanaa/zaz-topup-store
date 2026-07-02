@@ -143,8 +143,12 @@ export function CursorDrivenParticleTypography({
             const container = containerRef.current;
             if (!container) return;
 
+            // Read all layout properties first, before any DOM writes below,
+            // to avoid forcing a synchronous reflow between read and write.
             containerWidth = container.clientWidth;
             containerHeight = container.clientHeight;
+            const computedStyle = window.getComputedStyle(container);
+            const textColor = color || computedStyle.color || "#000000";
 
             const dpr = window.devicePixelRatio || 1;
             canvas.width = containerWidth * dpr;
@@ -153,10 +157,6 @@ export function CursorDrivenParticleTypography({
             canvas.style.height = `${containerHeight}px`;
 
             ctx.scale(dpr, dpr);
-
-            // Determine text color
-            const computedStyle = window.getComputedStyle(container);
-            const textColor = color || computedStyle.color || "#000000";
 
             ctx.clearRect(0, 0, containerWidth, containerHeight);
 
