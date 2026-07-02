@@ -148,3 +148,4 @@ export const adminApi = {
       { method: "DELETE" },
     ),
 };
+console.log("API service loaded successfully.");
